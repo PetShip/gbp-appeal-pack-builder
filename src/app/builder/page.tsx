@@ -37,7 +37,7 @@ export default function BuilderPage() {
             <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
-        <p className="text-base font-semibold text-slate-900">Case submitted</p>
+        <p className="text-base font-semibold text-slate-900">Appeal pack ready</p>
         <p className="text-sm text-slate-500">Redirecting to review…</p>
       </div>
     );
@@ -47,9 +47,9 @@ export default function BuilderPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6">
         <div className="flex-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Build your evidence pack</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Build your appeal pack</h1>
           <p className="mt-1 text-sm text-slate-500">
-            Fill in the details below to assemble your dispute evidence pack.
+            Fill in the details below to assemble a structured GBP appeal pack for your Google Business Profile.
           </p>
         </div>
         <div className="mx-auto w-full max-w-[240px] shrink-0 sm:mx-0 sm:max-w-[280px]">

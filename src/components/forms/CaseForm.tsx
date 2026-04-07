@@ -2,13 +2,14 @@
 
 import { Fragment, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CaseData, CaseType } from "@/types/case";
+import { CaseData, CaseType, EvidenceFile } from "@/types/case";
 import { validateCase, validateStep0, validateStep1, validateStep2 } from "@/lib/validation";
-import { getCaseTypeLabel } from "@/lib/dispute-types";
+import { getCaseTypeLabel, getCaseTypeUploadHints } from "@/lib/dispute-types";
 import DisputeTypeStep from "@/components/forms/DisputeTypeStep";
 import EvidenceUploadStep from "@/components/forms/EvidenceUploadStep";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
+import FileUpload from "@/components/ui/FileUpload";
 
 const EMPTY_CASE: Partial<CaseData> = {
   caseType: undefined,
@@ -27,10 +28,10 @@ const EMPTY_CASE: Partial<CaseData> = {
 };
 
 const STEP_LABELS = [
-  "Case type",
-  "Case basics",
-  "Description & evidence",
-  "Review",
+  "Case Type",
+  "Business Basics",
+  "Issue & Profile",
+  "Documents",
 ];
 
 type CaseFormProps = {
@@ -161,7 +162,7 @@ export default function CaseForm({ onComplete }: CaseFormProps) {
         {step === 1 && (
           <div className="flex flex-col gap-5">
             <div>
-              <h2 className="text-base font-semibold text-slate-900">Case basics</h2>
+              <h2 className="text-base font-semibold text-slate-900">Business Basics</h2>
               <p className="mt-0.5 text-xs text-slate-400">* indicates a required field</p>
             </div>
             <Input
@@ -217,13 +218,38 @@ export default function CaseForm({ onComplete }: CaseFormProps) {
         {step === 3 && (
           <div className="flex flex-col gap-5">
             <div>
-              <h2 className="text-base font-semibold text-slate-900">Confirm and build</h2>
+              <h2 className="text-base font-semibold text-slate-900">Supporting Documents</h2>
               <p className="mt-0.5 text-sm text-slate-500">
-                Review your entries below, then click{" "}
-                <strong className="text-slate-700">Build appeal pack</strong> to generate the
-                structured summary and proceed to export.
+                Upload any files that support your appeal — this step is optional. Once ready, click{" "}
+                <strong className="text-slate-700">Build appeal pack</strong> to generate your structured summary.
               </p>
             </div>
+
+            {/* Upload hints based on case type */}
+            {data.caseType && getCaseTypeUploadHints(data.caseType).length > 0 && (
+              <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5">
+                <p className="text-xs font-medium text-slate-600 mb-2">Useful files for this case type:</p>
+                <ul className="flex flex-col gap-1.5">
+                  {getCaseTypeUploadHints(data.caseType).map((hint) => (
+                    <li key={hint} className="flex items-start gap-2 text-xs text-slate-500">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" className="mt-0.5 shrink-0 text-emerald-500">
+                        <path d="M2 6l2.5 2.5 5.5-5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {hint}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <FileUpload
+              label="Evidence files (optional)"
+              helperText="Upload screenshots, official documents, photos, or other files that support your appeal. Accepted: images, PDFs, and other documents."
+              files={data.evidenceFiles ?? []}
+              onChange={(files: EvidenceFile[]) => update({ evidenceFiles: files })}
+            />
+
+            {/* Case summary — quick reference before building */}
             <dl className="flex flex-col gap-2.5 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm">
               <Row label="Case type" value={data.caseType ? getCaseTypeLabel(data.caseType) : "—"} />
               <Row label="Business name" value={data.businessName || "—"} />

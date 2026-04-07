@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       ],
       success_url: `${baseUrl}/export?payment_success=1&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/export`,
-      metadata: { product: "proofpack_evidence_pack" },
+      metadata: { product: "gbp_appeal_pack" },
     });
 
     return NextResponse.json({ url: session.url });

@@ -1,5 +1,3 @@
-# README.md
-
 # GBP Appeal Pack Builder
 
 GBP Appeal Pack Builder is a focused web utility that helps businesses and individuals with a suspended Google Business Profile build a clean, structured reinstatement appeal pack.
@@ -40,10 +38,10 @@ Version 1 is intentionally small.
 
 ### Supported appeal types in V1
 
-- unauthorized suspension
-- service not received
-- listing not recognised
-- listing not as described
+- documentation_mismatch
+- business_legitimacy_proof
+- profile_information_cleanup
+- restricted_or_disabled_profile
 
 ## Not included in V1
 

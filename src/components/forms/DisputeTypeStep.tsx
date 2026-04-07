@@ -1,64 +1,57 @@
 "use client";
 
-import { DisputeType } from "@/types/case";
-import { DISPUTE_TYPES } from "@/lib/dispute-types";
+import { CaseType } from "@/types/case";
+import { CASE_TYPES } from "@/lib/dispute-types";
 
-// Icon for each dispute type
-const DISPUTE_ICONS: Record<string, React.ReactElement> = {
-  unauthorized: (
+// Icon for each case type
+const CASE_ICONS: Record<string, React.ReactElement> = {
+  documentation_mismatch: (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <rect x="3" y="2" width="10" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
+      <path d="M6 6h5M6 9h3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
+      <circle cx="13.5" cy="13.5" r="3" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M13.5 12v1.5M13.5 14.7h.01" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.9" />
+    </svg>
+  ),
+  business_legitimacy_proof: (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M9 2L3 5v4c0 3.3 2.5 6.4 6 7 3.5-.6 6-3.7 6-7V5L9 2z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+      <path d="M6.5 9l2 2 3-3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  profile_information_cleanup: (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <circle cx="9" cy="9" r="6.5" stroke="currentColor" strokeWidth="1.3" />
+      <path d="M6 9h6M9 6v6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity="0.5" />
+      <path d="M11.5 6.5l-5 5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    </svg>
+  ),
+  restricted_or_disabled_profile: (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
       <rect x="2" y="5" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.3" />
       <path d="M6 5V4a3 3 0 016 0v1" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
       <circle cx="9" cy="10.5" r="1.5" fill="currentColor" opacity="0.7" />
     </svg>
   ),
-  service_not_received: (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <rect x="3" y="3" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M6 9h6M9 6v6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity="0.5" />
-      <path d="M4 14L14 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-    </svg>
-  ),
-  subscription_canceled: (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <path d="M3 9a6 6 0 1112 0A6 6 0 013 9z" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M9 6v3.5L11.5 12" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
-  product_not_as_described: (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <rect x="3" y="2" width="10" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M6 6h5M6 9h3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
-      <circle cx="13.5" cy="13.5" r="3" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M12 13.5l1 1 1.5-1.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.8" />
-    </svg>
-  ),
-  other: (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <circle cx="9" cy="9" r="6.5" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M9 10.5V10c0-.8.5-1.3 1.1-1.7C10.7 7.9 11 7.4 11 6.8 11 5.8 10.1 5 9 5S7 5.8 7 6.8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-      <circle cx="9" cy="12.5" r="0.7" fill="currentColor" />
-    </svg>
-  ),
 };
 
 type DisputeTypeStepProps = {
-  value: DisputeType | "";
-  onChange: (value: DisputeType) => void;
+  value: CaseType | "";
+  onChange: (value: CaseType) => void;
   error?: string;
 };
 
 export default function DisputeTypeStep({ value, onChange, error }: DisputeTypeStepProps) {
-  const selected = DISPUTE_TYPES.find((d) => d.value === value);
+  const selected = CASE_TYPES.find((c) => c.value === value);
 
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <h2 className="text-base font-semibold text-slate-900">Select dispute type</h2>
-        <p className="mt-0.5 text-xs text-slate-400">Choose the type that best matches your dispute.</p>
+        <h2 className="text-base font-semibold text-slate-900">Select case type</h2>
+        <p className="mt-0.5 text-xs text-slate-400">Choose the type that best matches your GBP appeal.</p>
       </div>
       <div className="flex flex-col gap-2.5">
-        {DISPUTE_TYPES.map((option) => {
+        {CASE_TYPES.map((option) => {
           const isSelected = value === option.value;
           return (
             <label
@@ -72,7 +65,7 @@ export default function DisputeTypeStep({ value, onChange, error }: DisputeTypeS
               <input
                 type="radio"
                 className="sr-only"
-                name="disputeType"
+                name="caseType"
                 value={option.value}
                 checked={isSelected}
                 onChange={() => onChange(option.value)}
@@ -83,7 +76,7 @@ export default function DisputeTypeStep({ value, onChange, error }: DisputeTypeS
                   isSelected ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-500"
                 }`}
               >
-                {DISPUTE_ICONS[option.value] ?? (
+                {CASE_ICONS[option.value] ?? (
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
                     <rect x="3" y="3" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.3" />
                   </svg>

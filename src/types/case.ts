@@ -1,11 +1,10 @@
-// Core data types for a chargeback dispute case
+// Core data types for a GBP Appeal Pack Builder case
 
-export type DisputeType =
-  | "unauthorized"
-  | "service_not_received"
-  | "subscription_canceled"
-  | "product_not_as_described"
-  | "other";
+export type CaseType =
+  | "documentation_mismatch"
+  | "business_legitimacy_proof"
+  | "profile_information_cleanup"
+  | "restricted_or_disabled_profile";
 
 export type EvidenceFile = {
   name: string;
@@ -20,30 +19,30 @@ export type EvidenceFile = {
   data?: string;
 };
 
-export type TimelineItem = {
-  date: string;
-  title: string;
-  description: string;
+export type ConsistencyItem = {
+  field: string;
+  officialValue: string;
+  profileValue: string;
 };
 
 export type CaseData = {
-  // Step 1
-  disputeType: DisputeType;
+  // Step 0 – case type
+  caseType: CaseType;
 
-  // Step 2 – case basics
-  customerName: string;
-  customerEmail?: string;
-  orderDate: string;
-  amount: string;
-  currency: string;
-  productName: string;
+  // Step 1 – case basics
+  businessName: string;
+  businessAddress: string;
+  primaryCategory: string;
+  website?: string;
+  issueDetectedDate?: string;
 
-  // Step 3 – description and evidence
-  productDescription: string;
-  fulfillmentDetails: string;
-  customerCommunication: string;
-  additionalNotes: string;
+  // Step 2 – description and evidence
+  issueDescription: string;
+  profileName: string;
+  profileAddress: string;
+  businessOperationDescription: string;
+  additionalNotes?: string;
 
-  timelineItems: TimelineItem[];
   evidenceFiles: EvidenceFile[];
+  consistencyItems?: ConsistencyItem[];
 };

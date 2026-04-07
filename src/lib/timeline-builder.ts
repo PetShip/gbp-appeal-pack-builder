@@ -1,39 +1,40 @@
-import { CaseData, TimelineItem } from "@/types/case";
+import { CaseData } from "@/types/case";
 
-// Derive a base timeline from structured case inputs.
-// In V1, timeline items are auto-generated from the case data.
+export type TimelineItem = {
+  date: string;
+  title: string;
+  description: string;
+};
+
+// Derive a minimal timeline from GBP appeal case inputs.
 export function buildTimeline(data: Partial<CaseData>): TimelineItem[] {
   const items: TimelineItem[] = [];
 
-  if (data.orderDate && data.productName) {
+  if (data.issueDetectedDate) {
     items.push({
-      date: data.orderDate,
-      title: "Order / subscription date",
-      description: `Customer purchased: ${data.productName}`,
+      date: data.issueDetectedDate,
+      title: "Issue detected",
+      description: `Issue identified on GBP profile for: ${data.businessName ?? ""}`.trim(),
     });
   }
 
-  if (data.fulfillmentDetails) {
+  if (data.issueDescription) {
     items.push({
-      // In V1, fulfillment is assumed to happen on the order date.
-      // A dedicated fulfillmentDate field can be added in a later version.
-      date: data.orderDate ?? "",
-      title: "Fulfillment",
-      description: data.fulfillmentDetails,
+      date: data.issueDetectedDate ?? "",
+      title: "Issue description",
+      description: data.issueDescription,
     });
   }
 
-  if (data.customerCommunication) {
-    items.push({
-      date: "",
-      title: "Customer communication",
-      description: data.customerCommunication,
-    });
-  }
-
-  // Append any manually added items
-  if (data.timelineItems) {
-    items.push(...data.timelineItems);
+  // Append any manually added consistency items as timeline entries
+  if (data.consistencyItems && data.consistencyItems.length > 0) {
+    for (const item of data.consistencyItems) {
+      items.push({
+        date: "",
+        title: `Inconsistency: ${item.field}`,
+        description: `Official: ${item.officialValue} — Profile: ${item.profileValue}`,
+      });
+    }
   }
 
   return items;

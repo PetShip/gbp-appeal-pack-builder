@@ -2,32 +2,32 @@
 
 import { Fragment, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CaseData, DisputeType } from "@/types/case";
+import { CaseData, CaseType } from "@/types/case";
 import { validateCase, validateStep0, validateStep1, validateStep2 } from "@/lib/validation";
-import { getDisputeTypeLabel } from "@/lib/dispute-types";
+import { getCaseTypeLabel } from "@/lib/dispute-types";
 import DisputeTypeStep from "@/components/forms/DisputeTypeStep";
 import EvidenceUploadStep from "@/components/forms/EvidenceUploadStep";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 
 const EMPTY_CASE: Partial<CaseData> = {
-  disputeType: undefined,
-  customerName: "",
-  customerEmail: "",
-  orderDate: "",
-  amount: "",
-  currency: "USD",
-  productName: "",
-  productDescription: "",
-  fulfillmentDetails: "",
-  customerCommunication: "",
+  caseType: undefined,
+  businessName: "",
+  businessAddress: "",
+  primaryCategory: "",
+  website: "",
+  issueDetectedDate: "",
+  issueDescription: "",
+  profileName: "",
+  profileAddress: "",
+  businessOperationDescription: "",
   additionalNotes: "",
-  timelineItems: [],
   evidenceFiles: [],
+  consistencyItems: [],
 };
 
 const STEP_LABELS = [
-  "Dispute type",
+  "Case type",
   "Case basics",
   "Description & evidence",
   "Review",
@@ -152,9 +152,9 @@ export default function CaseForm({ onComplete }: CaseFormProps) {
       <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
         {step === 0 && (
           <DisputeTypeStep
-            value={data.disputeType ?? ""}
-            onChange={(v: DisputeType) => update({ disputeType: v })}
-            error={errors.disputeType}
+            value={data.caseType ?? ""}
+            onChange={(v: CaseType) => update({ caseType: v })}
+            error={errors.caseType}
           />
         )}
 
@@ -165,60 +165,47 @@ export default function CaseForm({ onComplete }: CaseFormProps) {
               <p className="mt-0.5 text-xs text-slate-400">* indicates a required field</p>
             </div>
             <Input
-              id="customerName"
-              label="Customer name *"
-              placeholder="e.g. Jane Smith"
-              value={data.customerName}
-              error={errors.customerName}
-              onChange={(e) => update({ customerName: e.target.value })}
+              id="businessName"
+              label="Business name *"
+              placeholder="e.g. Acme Plumbing Co."
+              value={data.businessName}
+              error={errors.businessName}
+              onChange={(e) => update({ businessName: e.target.value })}
             />
             <Input
-              id="customerEmail"
-              label="Customer email"
-              type="email"
-              placeholder="e.g. jane@example.com"
-              helperText="Optional — include if you have email correspondence with this customer."
-              value={data.customerEmail}
-              onChange={(e) => update({ customerEmail: e.target.value })}
+              id="businessAddress"
+              label="Business address *"
+              placeholder="e.g. 123 Main St, Springfield, IL 62701"
+              helperText="The official registered address of the business."
+              value={data.businessAddress}
+              error={errors.businessAddress}
+              onChange={(e) => update({ businessAddress: e.target.value })}
             />
             <Input
-              id="orderDate"
-              label="Order date *"
+              id="primaryCategory"
+              label="Primary category *"
+              placeholder="e.g. Plumber, Restaurant, Dental clinic"
+              helperText="The primary business category as it appears on official records."
+              value={data.primaryCategory}
+              error={errors.primaryCategory}
+              onChange={(e) => update({ primaryCategory: e.target.value })}
+            />
+            <Input
+              id="website"
+              label="Website"
+              type="url"
+              placeholder="e.g. https://www.example.com"
+              helperText="Optional — include if your website supports your appeal."
+              value={data.website}
+              onChange={(e) => update({ website: e.target.value })}
+            />
+            <Input
+              id="issueDetectedDate"
+              label="Issue detected date"
               type="date"
-              helperText="The date the disputed charge was made."
-              value={data.orderDate}
-              error={errors.orderDate}
-              onChange={(e) => update({ orderDate: e.target.value })}
-            />
-            <div className="flex gap-3">
-              <Input
-                id="amount"
-                label="Amount *"
-                type="text"
-                placeholder="e.g. 49.00"
-                className="flex-1"
-                value={data.amount}
-                error={errors.amount}
-                onChange={(e) => update({ amount: e.target.value })}
-              />
-              <Input
-                id="currency"
-                label="Currency *"
-                type="text"
-                placeholder="USD"
-                className="w-24"
-                value={data.currency}
-                error={errors.currency}
-                onChange={(e) => update({ currency: e.target.value })}
-              />
-            </div>
-            <Input
-              id="productName"
-              label="Product / service name *"
-              placeholder="e.g. Pro Plan, Course Access"
-              value={data.productName}
-              error={errors.productName}
-              onChange={(e) => update({ productName: e.target.value })}
+              helperText="Optional — the date you first noticed the GBP issue."
+              value={data.issueDetectedDate}
+              onChange={(e) => update({ issueDetectedDate: e.target.value })}
             />
           </div>
         )}
@@ -233,23 +220,20 @@ export default function CaseForm({ onComplete }: CaseFormProps) {
               <h2 className="text-base font-semibold text-slate-900">Confirm and build</h2>
               <p className="mt-0.5 text-sm text-slate-500">
                 Review your entries below, then click{" "}
-                <strong className="text-slate-700">Build evidence pack</strong> to generate the
+                <strong className="text-slate-700">Build appeal pack</strong> to generate the
                 structured summary and proceed to export.
               </p>
             </div>
             <dl className="flex flex-col gap-2.5 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm">
-              <Row label="Dispute type" value={data.disputeType ? getDisputeTypeLabel(data.disputeType) : "—"} />
-              <Row label="Customer" value={data.customerName || "—"} />
-              {data.customerEmail && <Row label="Email" value={data.customerEmail} />}
-              <Row label="Order date" value={data.orderDate || "—"} />
-              <Row label="Amount" value={(data.amount && data.currency) ? `${data.currency} ${data.amount}` : "—"} />
-              <Row label="Product" value={data.productName || "—"} />
-              {data.productDescription && (
-                <Row label="Description" value={data.productDescription} />
-              )}
-              {data.fulfillmentDetails && (
-                <Row label="Fulfillment" value={data.fulfillmentDetails} />
-              )}
+              <Row label="Case type" value={data.caseType ? getCaseTypeLabel(data.caseType) : "—"} />
+              <Row label="Business name" value={data.businessName || "—"} />
+              <Row label="Business address" value={data.businessAddress || "—"} />
+              <Row label="Primary category" value={data.primaryCategory || "—"} />
+              {data.website && <Row label="Website" value={data.website} />}
+              {data.issueDetectedDate && <Row label="Issue detected" value={data.issueDetectedDate} />}
+              {data.issueDescription && <Row label="Issue" value={data.issueDescription} />}
+              {data.profileName && <Row label="Profile name" value={data.profileName} />}
+              {data.profileAddress && <Row label="Profile address" value={data.profileAddress} />}
               {(data.evidenceFiles?.length ?? 0) > 0 && (
                 <Row
                   label="Files"
@@ -283,7 +267,7 @@ export default function CaseForm({ onComplete }: CaseFormProps) {
           ← Back
         </Button>
         <Button onClick={handleNext}>
-          {step === 3 ? "Build evidence pack" : "Continue →"}
+          {step === 3 ? "Build appeal pack" : "Continue →"}
         </Button>
       </div>
     </div>

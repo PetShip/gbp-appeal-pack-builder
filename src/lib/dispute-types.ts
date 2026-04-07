@@ -1,55 +1,48 @@
-import { DisputeType } from "@/types/case";
+import { CaseType } from "@/types/case";
 
-export type DisputeTypeOption = {
-  value: DisputeType;
+export type CaseTypeOption = {
+  value: CaseType;
   label: string;
   description: string;
   guidance: string;
 };
 
-export const DISPUTE_TYPES: DisputeTypeOption[] = [
+export const CASE_TYPES: CaseTypeOption[] = [
   {
-    value: "unauthorized",
-    label: "Unauthorized transaction",
-    description: "The customer claims they did not authorize the charge.",
+    value: "documentation_mismatch",
+    label: "Documentation mismatch",
+    description: "The business name, address, or category on the GBP profile does not match official records.",
     guidance:
-      "Focus on proving the charge was authorized: login records, prior purchases from the same account, device or IP data, and any usage of the product after the charge date.",
+      "Gather official documents (business license, utility bills, tax records) that confirm the correct business details. Highlight the specific fields that differ between your profile and official records.",
   },
   {
-    value: "service_not_received",
-    label: "Service not received",
-    description: "The customer claims they did not receive the service or product.",
+    value: "business_legitimacy_proof",
+    label: "Business legitimacy proof",
+    description: "Google requires proof that the business is real, operating, and eligible for a GBP listing.",
     guidance:
-      "Provide proof that the product or service was made available: access confirmation emails, login history, delivery records, or screenshots showing the customer's account was active.",
+      "Provide evidence of active business operations: recent invoices, photos of the physical location, a government-issued business registration, or customer-facing materials that confirm the business exists and serves customers.",
   },
   {
-    value: "subscription_canceled",
-    label: "Subscription canceled / not recognized",
-    description: "The customer claims the subscription was canceled or they don't recognize it.",
+    value: "profile_information_cleanup",
+    label: "Profile information cleanup",
+    description: "The GBP profile contains outdated, inaccurate, or duplicate information that needs correction.",
     guidance:
-      "Show the subscription history, original sign-up date, and any communication about cancellation. If no cancellation was processed before the charge, document that clearly.",
+      "Document what information is incorrect and provide supporting materials that show the accurate current details — such as updated address records, rebranding documentation, or a corrected phone number with supporting evidence.",
   },
   {
-    value: "product_not_as_described",
-    label: "Product not as described",
-    description: "The customer claims the product did not match the description.",
+    value: "restricted_or_disabled_profile",
+    label: "Restricted or disabled profile",
+    description: "The GBP profile has been suspended, restricted, or disabled and requires reinstatement.",
     guidance:
-      "Compare what was advertised with what was delivered. Include the product listing as it appeared at purchase time. Address each specific claim the customer made with documented evidence.",
-  },
-  {
-    value: "other",
-    label: "Other / Custom dispute",
-    description: "For dispute situations that do not clearly match the standard categories.",
-    guidance:
-      "Focus on presenting a clear timeline, relevant documents, and your strongest supporting proof. Explain the nature of the dispute briefly and address each claim directly.",
+      "Explain why the profile should be reinstated and address the likely reason for the restriction. Include proof of compliance with Google's guidelines, evidence of a legitimate business presence, and any corrective actions taken.",
   },
 ];
 
-export function getDisputeTypeLabel(value: DisputeType): string {
-  return DISPUTE_TYPES.find((d) => d.value === value)?.label ?? value;
+export function getCaseTypeLabel(value: CaseType): string {
+  return CASE_TYPES.find((c) => c.value === value)?.label ?? value;
 }
 
-export function getDisputeTypeGuidance(value: DisputeType): string {
-  return DISPUTE_TYPES.find((d) => d.value === value)?.guidance ?? "";
+export function getCaseTypeGuidance(value: CaseType): string {
+  return CASE_TYPES.find((c) => c.value === value)?.guidance ?? "";
 }
 

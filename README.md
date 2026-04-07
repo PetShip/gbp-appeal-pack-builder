@@ -33,7 +33,7 @@ Version 1 is intentionally small.
 - review screen
 - PDF export containing:
   - case summary
-  - evidence timeline
+  - profile consistency overview
   - evidence list
 
 ### Supported appeal types in V1
@@ -63,7 +63,7 @@ Version 1 is intentionally small.
 2. User starts a new case
 3. User selects appeal type
 4. User enters case details
-5. User adds business, listing, and communication details
+5. User adds business, listing, and business, profile, and supporting document details
 6. User uploads supporting evidence files
 7. User reviews generated summary and structure
 8. User exports the case as PDF

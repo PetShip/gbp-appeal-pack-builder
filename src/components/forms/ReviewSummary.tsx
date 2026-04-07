@@ -3,7 +3,6 @@
 import { CaseData } from "@/types/case";
 import { buildSummary } from "@/lib/summary-builder";
 import { buildTimeline } from "@/lib/timeline-builder";
-import { getCaseTypeGuidance } from "@/lib/dispute-types";
 import { formatSize } from "@/lib/utils";
 
 type ReviewSummaryProps = {
@@ -13,7 +12,6 @@ type ReviewSummaryProps = {
 export default function ReviewSummary({ data }: ReviewSummaryProps) {
   const summary = buildSummary(data);
   const timeline = buildTimeline(data);
-  const caseGuidance = data.caseType ? getCaseTypeGuidance(data.caseType) : null;
 
   return (
     <div className="flex flex-col gap-8">
@@ -29,24 +27,10 @@ export default function ReviewSummary({ data }: ReviewSummaryProps) {
         </span>
       </div>
 
-      {/* Case-type-specific evidence guidance */}
-      {caseGuidance && (
-        <div className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-600">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="mt-0.5 shrink-0 text-slate-400">
-            <rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" strokeWidth="1.2" />
-            <path d="M5 7h4M7 5v4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
-          </svg>
-          <span>
-            <strong className="text-slate-700">Evidence strength check:</strong>{" "}
-            {caseGuidance} Make sure your uploaded files and descriptions cover these points.
-          </span>
-        </div>
-      )}
-
-      {/* ── Case summary ── */}
+      {/* ── Case Type ── */}
       <section>
         <SectionHeader
-          title="Case summary"
+          title="Case Type"
           icon={
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
@@ -56,23 +40,82 @@ export default function ReviewSummary({ data }: ReviewSummaryProps) {
         />
         <dl className="flex flex-col gap-0 divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden text-sm">
           <Row label="Case type" value={summary.caseTypeLabel} />
+          {summary.issueDetectedDate && <Row label="Issue detected" value={summary.issueDetectedDate} />}
+        </dl>
+      </section>
+
+      {/* ── Business Basics ── */}
+      <section>
+        <SectionHeader
+          title="Business Basics"
+          icon={
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 6.5L8 2l6 4.5V14H2V6.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+              <path d="M6 14V9h4v5" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+            </svg>
+          }
+        />
+        <dl className="flex flex-col gap-0 divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden text-sm">
           <Row label="Business name" value={summary.businessName} />
           <Row label="Business address" value={summary.businessAddress} />
           <Row label="Primary category" value={summary.primaryCategory} />
           {summary.website && <Row label="Website" value={summary.website} />}
-          {summary.issueDetectedDate && <Row label="Issue detected" value={summary.issueDetectedDate} />}
-          <Row label="Issue description" value={summary.issueDescription} />
-          <Row label="Profile name" value={summary.profileName} />
-          <Row label="Profile address" value={summary.profileAddress} />
-          <Row label="Business operations" value={summary.businessOperationDescription} />
-          {summary.additionalNotes && <Row label="Notes" value={summary.additionalNotes} />}
         </dl>
       </section>
 
-      {/* ── Evidence timeline ── */}
+      {/* ── Issue Context ── */}
       <section>
         <SectionHeader
-          title="Evidence timeline"
+          title="Issue Context"
+          icon={
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.2" />
+              <path d="M8 5.5v3M8 10h.01" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+          }
+        />
+        <dl className="flex flex-col gap-0 divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden text-sm">
+          <Row label="Issue description" value={summary.issueDescription} />
+        </dl>
+      </section>
+
+      {/* ── Profile Information ── */}
+      <section>
+        <SectionHeader
+          title="Profile Information"
+          icon={
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="5" r="2.5" stroke="currentColor" strokeWidth="1.2" />
+              <path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+          }
+        />
+        <dl className="flex flex-col gap-0 divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden text-sm">
+          <Row label="Profile name" value={summary.profileName} />
+          <Row label="Profile address" value={summary.profileAddress} />
+        </dl>
+      </section>
+
+      {/* ── Business Legitimacy Details ── */}
+      <section>
+        <SectionHeader
+          title="Business Legitimacy Details"
+          icon={
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 1.5L2 4.5v4c0 3 2.2 5.8 6 6.5 3.8-.7 6-3.5 6-6.5v-4L8 1.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+              <path d="M5.5 8l2 2 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          }
+        />
+        <dl className="flex flex-col gap-0 divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden text-sm">
+          <Row label="Business operations" value={summary.businessOperationDescription} />
+        </dl>
+      </section>
+
+      {/* ── Evidence Timeline ── */}
+      <section>
+        <SectionHeader
+          title="Appeal Timeline"
           subtitle="Auto-generated from the case details you entered. This will appear in the PDF."
           icon={
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -106,10 +149,10 @@ export default function ReviewSummary({ data }: ReviewSummaryProps) {
         )}
       </section>
 
-      {/* ── Attached files ── */}
+      {/* ── Supporting Documents ── */}
       <section>
         <SectionHeader
-          title="Attached evidence files"
+          title="Supporting Documents"
           subtitle="Images will be rendered inline in the PDF. PDFs will be appended as additional pages. Other file types will be noted but cannot be rendered inline."
           icon={
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -144,6 +187,24 @@ export default function ReviewSummary({ data }: ReviewSummaryProps) {
           </ul>
         )}
       </section>
+
+      {/* ── Additional Notes ── */}
+      {summary.additionalNotes && (
+        <section>
+          <SectionHeader
+            title="Additional Notes"
+            icon={
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
+                <path d="M5 6h6M5 9h4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
+              </svg>
+            }
+          />
+          <dl className="flex flex-col gap-0 divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden text-sm">
+            <Row label="Notes" value={summary.additionalNotes} />
+          </dl>
+        </section>
+      )}
     </div>
   );
 }

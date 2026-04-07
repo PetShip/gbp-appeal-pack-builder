@@ -157,16 +157,16 @@ function ExportContent() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      // Use product name from case data for a more identifiable filename
+      // Use business name from case data for a more identifiable filename
       try {
         const caseData = JSON.parse(stored);
-        const product = caseData.productName as string | undefined;
-        const slug = product
-          ? product.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40)
+        const businessName = caseData.businessName as string | undefined;
+        const slug = businessName
+          ? businessName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40)
           : "";
-        a.download = slug ? `${slug}-dispute-evidence.pdf` : "dispute-evidence.pdf";
+        a.download = slug ? `${slug}-gbp-appeal-pack.pdf` : `gbp-appeal-pack-${Date.now()}.pdf`;
       } catch {
-        a.download = "dispute-evidence.pdf";
+        a.download = "gbp-appeal-pack.pdf";
       }
       a.click();
       URL.revokeObjectURL(url);
@@ -183,9 +183,9 @@ function ExportContent() {
     <div className="flex flex-col gap-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Export your evidence pack</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Export your appeal pack</h1>
         <p className="mt-1 text-sm text-slate-500">
-          Download your case as a structured PDF ready to submit with your dispute.
+          Download your case as a structured PDF ready to include with your GBP appeal.
         </p>
       </div>
 
@@ -206,7 +206,7 @@ function ExportContent() {
             <>
               <div>
                 <h2 className="text-sm font-semibold text-slate-900">
-                  Unlock your evidence pack — {PAYMENT_CONFIG.priceDisplay}
+                  Unlock your appeal pack — {PAYMENT_CONFIG.priceDisplay}
                 </h2>
                 <p className="mt-1 text-sm text-slate-500 leading-relaxed">
                   One-time payment. Instant download. Your PDF is ready — pay to unlock it.
@@ -214,9 +214,9 @@ function ExportContent() {
               </div>
               <ul className="flex flex-col gap-1.5">
                 {[
-                  "Structured PDF ready to upload to Stripe",
-                  "Evidence timeline auto-generated",
-                  "All your uploaded files included",
+                  "Structured PDF organised for a GBP appeal",
+                  "Appeal timeline auto-generated",
+                  "All your uploaded supporting files included",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-600">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="shrink-0 text-emerald-500">
@@ -307,7 +307,7 @@ function ExportContent() {
                 <ul className="mt-2.5 flex flex-col gap-1.5">
                   {[
                     "A structured case summary with all the details you entered",
-                    "An auto-generated evidence timeline",
+                    "An auto-generated appeal timeline",
                     "Uploaded images rendered inline",
                     "Uploaded PDFs appended as additional pages",
                     "Other file types noted by name and type",
@@ -423,16 +423,16 @@ function ExportContent() {
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <p className="text-sm font-semibold text-emerald-900">Your evidence pack is ready</p>
+                <p className="text-sm font-semibold text-emerald-900">Your appeal pack is ready</p>
                 <p className="text-sm text-emerald-700 leading-relaxed max-w-xs">
-                  Your PDF has been downloaded. Submit it with your Stripe dispute response to present your case clearly.
+                  Your PDF has been downloaded. You can now use it as part of your GBP reinstatement appeal.
                 </p>
               </div>
               <Link
                 href="/builder"
                 className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 hover:text-emerald-800 transition-colors"
               >
-                Build another evidence pack
+                Build another appeal pack
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                   <path d="M2.5 6h7M7 3.5L9.5 6 7 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -459,7 +459,7 @@ function ExportContent() {
           href="/builder"
           className="text-sm text-slate-400 hover:text-slate-600 transition-colors"
         >
-          Build a new evidence pack
+          Build a new appeal pack
         </Link>
       </div>
     </div>

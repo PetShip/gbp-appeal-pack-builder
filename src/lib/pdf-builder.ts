@@ -60,8 +60,8 @@ export async function generatePdfBuffer(data: CaseData): Promise<Buffer> {
       ["Website", summary.website],
       ["Issue detected", summary.issueDetectedDate],
       ["Issue description", summary.issueDescription],
-      ["Profile name", summary.profileName],
-      ["Profile address", summary.profileAddress],
+      ["Profile name (current)", summary.profileName],
+      ["Profile address (current)", summary.profileAddress],
       ["Business operations", summary.businessOperationDescription],
       ["Additional notes", summary.additionalNotes],
     ];
@@ -76,8 +76,8 @@ export async function generatePdfBuffer(data: CaseData): Promise<Buffer> {
 
     doc.moveDown(1);
 
-    // ── Evidence Timeline ───────────────────────────────────────────────────
-    doc.fontSize(14).font("Helvetica-Bold").text("Evidence Timeline");
+    // ── Appeal Timeline ─────────────────────────────────────────────────────
+    doc.fontSize(14).font("Helvetica-Bold").text("Appeal Timeline");
     doc.moveTo(50, doc.y).lineTo(doc.page.width - 50, doc.y).stroke();
     doc.moveDown(0.5);
 
@@ -98,8 +98,8 @@ export async function generatePdfBuffer(data: CaseData): Promise<Buffer> {
 
     doc.moveDown(1);
 
-    // ── Evidence Files index ────────────────────────────────────────────────
-    doc.fontSize(14).font("Helvetica-Bold").text("Evidence Files");
+    // ── Supporting Documents ────────────────────────────────────────────────
+    doc.fontSize(14).font("Helvetica-Bold").text("Supporting Documents");
     doc.moveTo(50, doc.y).lineTo(doc.page.width - 50, doc.y).stroke();
     doc.moveDown(0.5);
 

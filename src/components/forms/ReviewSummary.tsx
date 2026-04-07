@@ -3,7 +3,7 @@
 import { CaseData } from "@/types/case";
 import { buildSummary } from "@/lib/summary-builder";
 import { buildTimeline } from "@/lib/timeline-builder";
-import { getDisputeTypeGuidance } from "@/lib/dispute-types";
+import { getCaseTypeGuidance } from "@/lib/dispute-types";
 import { formatSize } from "@/lib/utils";
 
 type ReviewSummaryProps = {
@@ -13,7 +13,7 @@ type ReviewSummaryProps = {
 export default function ReviewSummary({ data }: ReviewSummaryProps) {
   const summary = buildSummary(data);
   const timeline = buildTimeline(data);
-  const disputeGuidance = data.disputeType ? getDisputeTypeGuidance(data.disputeType) : null;
+  const caseGuidance = data.caseType ? getCaseTypeGuidance(data.caseType) : null;
 
   return (
     <div className="flex flex-col gap-8">
@@ -24,13 +24,13 @@ export default function ReviewSummary({ data }: ReviewSummaryProps) {
           <path d="M8 7v4M8 5h.01" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
         <span>
-          This is how your evidence pack will be structured in the exported PDF. Review each section
+          This is how your appeal pack will be structured in the exported PDF. Review each section
           carefully before exporting.
         </span>
       </div>
 
-      {/* Dispute-specific evidence guidance */}
-      {disputeGuidance && (
+      {/* Case-type-specific evidence guidance */}
+      {caseGuidance && (
         <div className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-600">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="mt-0.5 shrink-0 text-slate-400">
             <rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" strokeWidth="1.2" />
@@ -38,7 +38,7 @@ export default function ReviewSummary({ data }: ReviewSummaryProps) {
           </svg>
           <span>
             <strong className="text-slate-700">Evidence strength check:</strong>{" "}
-            {disputeGuidance} Make sure your uploaded files and descriptions cover these points.
+            {caseGuidance} Make sure your uploaded files and descriptions cover these points.
           </span>
         </div>
       )}
@@ -55,17 +55,16 @@ export default function ReviewSummary({ data }: ReviewSummaryProps) {
           }
         />
         <dl className="flex flex-col gap-0 divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden text-sm">
-          <Row label="Dispute type" value={summary.disputeTypeLabel} />
-          <Row label="Customer" value={summary.customerName} />
-          {summary.customerEmail && <Row label="Email" value={summary.customerEmail} />}
-          <Row label="Order date" value={summary.orderDate} />
-          <Row label="Amount" value={`${summary.currency} ${summary.amount}`} />
-          <Row label="Product" value={summary.productName} />
-          <Row label="Description" value={summary.productDescription} />
-          <Row label="Fulfillment" value={summary.fulfillmentDetails} />
-          {summary.customerCommunication && (
-            <Row label="Communication" value={summary.customerCommunication} />
-          )}
+          <Row label="Case type" value={summary.caseTypeLabel} />
+          <Row label="Business name" value={summary.businessName} />
+          <Row label="Business address" value={summary.businessAddress} />
+          <Row label="Primary category" value={summary.primaryCategory} />
+          {summary.website && <Row label="Website" value={summary.website} />}
+          {summary.issueDetectedDate && <Row label="Issue detected" value={summary.issueDetectedDate} />}
+          <Row label="Issue description" value={summary.issueDescription} />
+          <Row label="Profile name" value={summary.profileName} />
+          <Row label="Profile address" value={summary.profileAddress} />
+          <Row label="Business operations" value={summary.businessOperationDescription} />
           {summary.additionalNotes && <Row label="Notes" value={summary.additionalNotes} />}
         </dl>
       </section>

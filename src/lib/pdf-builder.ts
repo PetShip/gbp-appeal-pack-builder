@@ -27,22 +27,22 @@ export async function generatePdfBuffer(data: CaseData): Promise<Buffer> {
     doc.on("end", () => resolve(Buffer.concat(chunks)));
     doc.on("error", reject);
 
-    // Title — user-focused: product name and dispute context as primary identity
-    const docTitle = summary.productName
-      ? `${summary.productName} — Dispute Evidence`
-      : "Dispute Evidence Pack";
+    // Title — business name and case type as primary identity
+    const docTitle = summary.businessName
+      ? `${summary.businessName} — GBP Appeal Pack`
+      : "GBP Appeal Pack";
     doc
       .fontSize(18)
       .font("Helvetica-Bold")
       .text(docTitle, { align: "center" });
 
-    if (summary.disputeTypeLabel) {
+    if (summary.caseTypeLabel) {
       doc
         .moveDown(0.4)
         .fontSize(10)
         .font("Helvetica")
         .fillColor("#555555")
-        .text(summary.disputeTypeLabel, { align: "center" })
+        .text(summary.caseTypeLabel, { align: "center" })
         .fillColor("#000000");
     }
     doc.moveDown(1.5);
@@ -53,15 +53,16 @@ export async function generatePdfBuffer(data: CaseData): Promise<Buffer> {
     doc.moveDown(0.5);
 
     const summaryFields: [string, string | undefined][] = [
-      ["Dispute type", summary.disputeTypeLabel],
-      ["Customer name", summary.customerName],
-      ["Customer email", summary.customerEmail],
-      ["Order date", summary.orderDate],
-      ["Amount", `${summary.amount} ${summary.currency}`],
-      ["Product name", summary.productName],
-      ["Product description", summary.productDescription],
-      ["Fulfillment details", summary.fulfillmentDetails],
-      ["Customer communication", summary.customerCommunication],
+      ["Case type", summary.caseTypeLabel],
+      ["Business name", summary.businessName],
+      ["Business address", summary.businessAddress],
+      ["Primary category", summary.primaryCategory],
+      ["Website", summary.website],
+      ["Issue detected", summary.issueDetectedDate],
+      ["Issue description", summary.issueDescription],
+      ["Profile name", summary.profileName],
+      ["Profile address", summary.profileAddress],
+      ["Business operations", summary.businessOperationDescription],
       ["Additional notes", summary.additionalNotes],
     ];
 

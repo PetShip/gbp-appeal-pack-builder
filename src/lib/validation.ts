@@ -6,14 +6,14 @@ export type ValidationResult = {
 };
 
 const FIELD_ERROR_MESSAGES: Partial<Record<keyof CaseData, string>> = {
-  disputeType: "Please select a dispute type.",
-  customerName: "Customer name is required.",
-  orderDate: "Order date is required.",
-  amount: "Enter the disputed amount.",
-  currency: "Currency is required (e.g. USD).",
-  productName: "Product name is required.",
-  productDescription: "Product description is required.",
-  fulfillmentDetails: "Fulfillment details are required.",
+  caseType: "Please select a case type.",
+  businessName: "Business name is required.",
+  businessAddress: "Business address is required.",
+  primaryCategory: "Primary category is required.",
+  issueDescription: "Issue description is required.",
+  profileName: "Profile name is required.",
+  profileAddress: "Profile address is required.",
+  businessOperationDescription: "Business operation description is required.",
 };
 
 function isEmpty(value: unknown): boolean {
@@ -24,11 +24,11 @@ function buildResult(errors: Partial<Record<keyof CaseData, string>>): Validatio
   return { valid: Object.keys(errors).length === 0, errors };
 }
 
-/** Step 0 — dispute type selection */
+/** Step 0 — case type selection */
 export function validateStep0(data: Partial<CaseData>): ValidationResult {
   const errors: Partial<Record<keyof CaseData, string>> = {};
-  if (isEmpty(data.disputeType)) {
-    errors.disputeType = FIELD_ERROR_MESSAGES.disputeType ?? "Please select a dispute type.";
+  if (isEmpty(data.caseType)) {
+    errors.caseType = FIELD_ERROR_MESSAGES.caseType ?? "Please select a case type.";
   }
   return buildResult(errors);
 }
@@ -36,7 +36,7 @@ export function validateStep0(data: Partial<CaseData>): ValidationResult {
 /** Step 1 — case basics */
 export function validateStep1(data: Partial<CaseData>): ValidationResult {
   const errors: Partial<Record<keyof CaseData, string>> = {};
-  const step1Fields: (keyof CaseData)[] = ["customerName", "orderDate", "amount", "currency", "productName"];
+  const step1Fields: (keyof CaseData)[] = ["businessName", "businessAddress", "primaryCategory"];
   for (const field of step1Fields) {
     if (isEmpty(data[field])) {
       errors[field] = FIELD_ERROR_MESSAGES[field] ?? "This field is required.";
@@ -48,7 +48,12 @@ export function validateStep1(data: Partial<CaseData>): ValidationResult {
 /** Step 2 — description and evidence */
 export function validateStep2(data: Partial<CaseData>): ValidationResult {
   const errors: Partial<Record<keyof CaseData, string>> = {};
-  const step2Fields: (keyof CaseData)[] = ["productDescription", "fulfillmentDetails"];
+  const step2Fields: (keyof CaseData)[] = [
+    "issueDescription",
+    "profileName",
+    "profileAddress",
+    "businessOperationDescription",
+  ];
   for (const field of step2Fields) {
     if (isEmpty(data[field])) {
       errors[field] = FIELD_ERROR_MESSAGES[field] ?? "This field is required.";

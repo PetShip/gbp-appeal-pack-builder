@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* ── Brand palette: RAL 200 20 23 (H=200°, L=20, C=23 → #00393b) ── */
+/* Shade 600 is the primary. The full scale is derived from the same   */
+/* LCh hue (200°) with lightness/chroma scaled per shade.              */
+@theme {
+  --color-emerald-50:  #f0f8f8;
+  --color-emerald-100: #daecec;
+  --color-emerald-200: #b8d4d5;
+  --color-emerald-300: #85b3b4;
+  --color-emerald-400: #498c8d;
+  --color-emerald-500: #146365;
+  --color-emerald-600: #00393b;
+  --color-emerald-700: #002a2c;
+  --color-emerald-800: #001e1f;
+  --color-emerald-900: #001414;
+}
+
+@layer base {
+  :root {
+    --color-primary: 0 57 59;           /* #00393b — RAL 200 20 23 */
+    --color-primary-light: 218 236 236; /* #daecec — teal-100 */
+    --color-surface: 248 250 252;       /* slate-50 */
+    --color-border: 226 232 240;        /* slate-200 */
+    --color-text: 15 23 42;             /* slate-900 */
+    --color-muted: 100 116 139;         /* slate-500 */
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Polished focus ring for interactive elements */
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-primary));
+    outline-offset: 2px;
+  }
+
+  /* Subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(203 213 225);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(148 163 184);
+  }
+}

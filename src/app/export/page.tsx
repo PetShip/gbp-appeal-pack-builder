@@ -164,7 +164,7 @@ function ExportContent() {
         const slug = businessName
           ? businessName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40)
           : "";
-        a.download = slug ? `${slug}-gbp-appeal-pack.pdf` : "gbp-appeal-pack.pdf";
+        a.download = slug ? `${slug}-gbp-appeal-pack.pdf` : `gbp-appeal-pack-${Date.now()}.pdf`;
       } catch {
         a.download = "gbp-appeal-pack.pdf";
       }

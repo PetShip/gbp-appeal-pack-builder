@@ -4,9 +4,9 @@
 
 ## Product boundary
 
-ProofPack V1 is a no-login, single-session web utility.
+GBP Appeal Pack Builder V1 is a no-login, single-session web utility.
 
-It helps a user create a dispute-ready PDF for one Stripe-related SaaS or digital product dispute.
+It helps a user create a reinstatement-ready PDF for one Google Business Profile suspension appeal.
 
 It does not store long-term user accounts or act as a case management platform.
 
@@ -14,7 +14,7 @@ It does not store long-term user accounts or act as a case management platform.
 
 The goal of V1 is to support one narrow workflow:
 
-Collect dispute information, structure the case, and generate a clean PDF export.
+Collect appeal information, structure the case, and generate a clean PDF export.
 
 ## Product constraints
 
@@ -25,22 +25,22 @@ Collect dispute information, structure the case, and generate a clean PDF export
 - no database
 - no admin area
 - no team features
-- no direct Stripe integration
+- no direct Google API integration
 - no legal advice
-- no automated dispute submission
+- no automated appeal submission
 
 These constraints are intentional and reduce both technical complexity and support burden.
 
-## Supported dispute types
+## Supported appeal types
 
-V1 supports only these four dispute types:
+V1 supports only these four appeal types:
 
-- unauthorized
+- unauthorized suspension
 - service not received
-- subscription canceled
-- product not as described
+- listing not recognised
+- listing not as described
 
-The reason for limiting dispute types is to keep the UI, wording, and output logic manageable.
+The reason for limiting appeal types is to keep the UI, wording, and output logic manageable.
 
 ## Application structure
 
@@ -67,17 +67,16 @@ The reason for limiting dispute types is to keep the UI, wording, and output log
 
 The builder is split into 4 steps:
 
-### Step 1 – Dispute type
-User selects one of the supported dispute types.
+### Step 1 – Appeal type
+User selects one of the supported appeal types.
 
 ### Step 2 – Case basics
 User enters:
-- customer name
-- optional customer email
-- order date
-- amount
-- currency
-- product name
+- business name
+- optional contact email
+- listing creation date
+- GBP listing URL or CID
+- primary business category
 
 ### Step 3 – Description and evidence
 User enters:
@@ -187,7 +186,7 @@ Example timeline entries:
 - order/subscription date
 - access or delivery fulfillment note
 - customer communication event
-- dispute preparation date
+- appeal preparation date
 
 ## File handling
 
@@ -229,7 +228,7 @@ V1 does not generate:
 
 - ZIP bundles
 - submission-ready API packages
-- direct Stripe-formatted uploads
+- direct Google-formatted uploads
 
 ## Technical decisions
 
@@ -262,7 +261,7 @@ V1 does not generate:
 ## Folder structure
 
 ```
-chargeback-evidence-builder/
+gbp-appeal-pack-builder/
 ├─ src/
 │  ├─ app/
 │  │  ├─ page.tsx
@@ -319,8 +318,8 @@ To prevent scope creep, these areas are excluded from V1:
 - multi-session recovery
 - team collaboration
 - admin dashboards
-- dispute analytics
-- Stripe synchronization
+- appeal analytics
+- Google API synchronization
 - CRM/helpdesk integrations
 - billing system
 - multi-platform support

@@ -3,7 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
-const BASE_URL = "https://proofpack.pro";
+const BASE_URL = "https://gbpappealpack.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -13,34 +13,34 @@ export const metadata: Metadata = {
         : BASE_URL)
   ),
   title: {
-    default: "ProofPack — Stripe Chargeback Evidence Builder",
-    template: "%s | ProofPack",
+    default: "GBP Appeal Pack Builder — Google Business Profile Reinstatement",
+    template: "%s | GBP Appeal Pack Builder",
   },
   description:
-    "Turn scattered customer proof into a clean, dispute-ready evidence pack. ProofPack helps Stripe SaaS and digital product businesses organize and export chargeback evidence in minutes. $4.99 one-time payment.",
+    "Build a clean, structured appeal pack for your Google Business Profile reinstatement request. GBP Appeal Pack Builder helps you organise your evidence and export a ready-to-submit PDF in minutes.",
   keywords: [
-    "stripe chargeback evidence",
-    "dispute evidence pack",
-    "digital product chargeback",
-    "saas dispute response",
-    "chargeback evidence template",
-    "stripe dispute evidence",
+    "GBP reinstatement appeal",
+    "Google Business Profile appeal",
+    "GBP suspension appeal",
+    "Google Business Profile reinstatement",
+    "GBP appeal pack",
+    "Google Business Profile evidence",
   ],
-  authors: [{ name: "ProofPack", url: BASE_URL }],
+  authors: [{ name: "GBP Appeal Pack Builder", url: BASE_URL }],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: BASE_URL,
-    siteName: "ProofPack",
-    title: "ProofPack — Stripe Chargeback Evidence Builder",
+    siteName: "GBP Appeal Pack Builder",
+    title: "GBP Appeal Pack Builder — Google Business Profile Reinstatement",
     description:
-      "Turn scattered customer proof into a clean, dispute-ready evidence pack for Stripe SaaS and digital product disputes.",
+      "Build a clean, structured appeal pack for your Google Business Profile reinstatement request.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ProofPack — Stripe Chargeback Evidence Builder",
+    title: "GBP Appeal Pack Builder — Google Business Profile Reinstatement",
     description:
-      "Turn scattered customer proof into a clean, dispute-ready evidence pack for Stripe SaaS and digital product disputes.",
+      "Build a clean, structured appeal pack for your Google Business Profile reinstatement request.",
     images: ["/opengraph-image"],
   },
   robots: {
@@ -84,7 +84,7 @@ export default function RootLayout({
                 <rect x="4" y="14" width="5" height="1.5" rx="0.75" fill="white" opacity="0.6" />
               </svg>
               <span className="text-sm font-semibold text-slate-900 group-hover:text-emerald-600 transition-colors">
-                ProofPack
+                GBP Appeal Pack Builder
               </span>
             </Link>
             <nav className="flex items-center gap-1 text-sm">
@@ -113,10 +113,9 @@ export default function RootLayout({
             <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
               {/* Brand */}
               <div className="flex flex-col gap-2">
-                <span className="text-sm font-semibold text-slate-800">ProofPack</span>
+                <span className="text-sm font-semibold text-slate-800">GBP Appeal Pack Builder</span>
                 <p className="text-xs text-slate-400 max-w-xs leading-relaxed">
-                  Turn scattered customer proof into a clean, dispute-ready evidence pack.
-                  Built for Stripe SaaS and digital product businesses.
+                  Build a clean, structured appeal pack for your Google Business Profile reinstatement request.
                 </p>
               </div>
 
@@ -126,16 +125,6 @@ export default function RootLayout({
                   <span className="font-medium text-slate-700">Product</span>
                   <Link href="/builder" className="hover:text-slate-900 transition-colors">Build your pack</Link>
                   <Link href="/faq" className="hover:text-slate-900 transition-colors">FAQ</Link>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <span className="font-medium text-slate-700">Guides</span>
-                  <Link href="/stripe-chargeback-evidence" className="hover:text-slate-900 transition-colors">Stripe chargeback evidence</Link>
-                  <Link href="/digital-product-chargeback-evidence" className="hover:text-slate-900 transition-colors">Digital product disputes</Link>
-                  <Link href="/chargeback-evidence-template" className="hover:text-slate-900 transition-colors">Evidence template</Link>
-                  <Link href="/unauthorized-transaction-evidence" className="hover:text-slate-900 transition-colors">Unauthorized transaction</Link>
-                  <Link href="/service-not-received-evidence" className="hover:text-slate-900 transition-colors">Service not received</Link>
-                  <Link href="/subscription-canceled-evidence" className="hover:text-slate-900 transition-colors">Subscription disputes</Link>
-                  <Link href="/product-not-as-described-evidence" className="hover:text-slate-900 transition-colors">Product not as described</Link>
                 </div>
                 <div className="flex flex-col gap-2">
                   <span className="font-medium text-slate-700">Legal</span>
@@ -149,7 +138,7 @@ export default function RootLayout({
 
             <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
               <span className="text-xs text-slate-400">
-                © {new Date().getFullYear()} ProofPack · proofpack.pro
+                © {new Date().getFullYear()} GBP Appeal Pack Builder · gbpappealpack.com
               </span>
               <span className="text-xs text-slate-300">
                 No account required · No data stored

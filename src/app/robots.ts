@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://proofpack.pro/sitemap.xml",
+    sitemap: "https://gbpappealpack.com/sitemap.xml",
   };
 }

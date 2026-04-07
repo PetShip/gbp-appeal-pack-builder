@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Review Your Evidence Pack",
-  description: "Review the generated structure of your dispute evidence pack before exporting to PDF.",
+  title: "Review Your Appeal Pack",
+  description: "Review the generated structure of your GBP appeal pack before exporting to PDF.",
   robots: {
     index: false,
     follow: false,

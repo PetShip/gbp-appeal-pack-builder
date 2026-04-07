@@ -10,7 +10,7 @@ const CASE_ICONS: Record<string, React.ReactElement> = {
       <rect x="3" y="2" width="10" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
       <path d="M6 6h5M6 9h3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
       <circle cx="13.5" cy="13.5" r="3" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M12.5 13.5h2M13.5 12.5v2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.8" />
+      <path d="M13.5 12v1.5M13.5 14.7h.01" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.9" />
     </svg>
   ),
   business_legitimacy_proof: (

@@ -1,5 +1,5 @@
 {
-  "name": "chargeback_evidence_builder",
+  "name": "gbp-appeal-pack-builder",
   "version": "0.1.0",
   "private": true,
   "scripts": {

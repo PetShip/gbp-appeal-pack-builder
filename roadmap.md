@@ -5,7 +5,7 @@
 ## V1 now
 - landing page
 - no-login builder flow
-- support for 4 dispute types
+- support for 4 appeal types
 - case input form
 - evidence file upload
 - review page
@@ -19,14 +19,14 @@
 - saved cases
 - user accounts
 - better timeline generation
-- Stripe-specific export improvements
-- additional dispute types
+- Google-specific export improvements
+- additional appeal types
 
 ## Not now
 - team collaboration
 - admin dashboard
 - analytics
-- direct Stripe integration
+- direct Google API integration
 - CRM/helpdesk integrations
 - legal advice features
 - fraud prevention system

@@ -290,102 +290,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 2. How AppealKit Works ── */}
-        <section id="how-it-works" className="flex flex-col gap-8 scroll-mt-20">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-              How AppealKit works
-            </h2>
-            <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
-              Four focused steps from scattered documents to a download-ready appeal pack.
-            </p>
-          </div>
-
-          <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {HOW_IT_WORKS.map((item) => (
-              <li key={item.step}>
-                <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
-                  <div className="flex items-start gap-3 p-5">
-                    <div className="shrink-0">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">
-                        {item.step}
-                      </span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-                      <p className="mt-2 text-sm text-slate-500 leading-relaxed">{item.description}</p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-
-          <div className="text-center">
-            <Link
-              href="/builder"
-              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700"
-            >
-              Start building — $4.99
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </div>
-        </section>
-
-        {/* ── 3. Supported Case Types ── */}
-        <section className="flex flex-col gap-6">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-              Supported case types
-            </h2>
-            <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
-              AppealKit covers the four most common GBP suspension and restriction scenarios.
-            </p>
-          </div>
-
-          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {CASE_TYPES.map((item) => (
-              <li key={item.title}>
-                <AccordionItem title={item.title}>
-                  {item.description}
-                </AccordionItem>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* ── 4. What Goes Into Your Appeal Pack ── */}
-        <section className="flex flex-col gap-8">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-              What goes into your appeal pack
-            </h2>
-            <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
-              AppealKit structures your case into a consistent, readable format.
-            </p>
-          </div>
-
-          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {WHAT_GOES_IN.map((item) => (
-              <li key={item.title}>
-                <AccordionItem
-                  badge={
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
-                      {item.icon}
-                    </span>
-                  }
-                  title={item.title}
-                >
-                  {item.description}
-                </AccordionItem>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* ── 5. Why Businesses Use AppealKit ── */}
+        {/* ── 2. Why Businesses Use AppealKit ── */}
         <section className="flex flex-col gap-8">
           <div className="text-center">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">
@@ -398,8 +303,8 @@ export default function Home() {
 
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {TRUST_POINTS.map((item) => (
-              <li key={item.title}>
-                <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
+              <li key={item.title} className="flex">
+                <div className="rounded-xl border border-slate-200 bg-white shadow-sm h-full w-full">
                   <div className="flex items-start gap-3 p-5">
                     <div className="shrink-0">
                       <span className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100">
@@ -447,6 +352,98 @@ export default function Home() {
               </ul>
             </div>
           </div>
+        </section>
+
+        {/* ── 3. Supported Case Types ── */}
+        <section className="flex flex-col gap-6">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+              Supported case types
+            </h2>
+            <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
+              AppealKit covers the four most common GBP suspension and restriction scenarios.
+            </p>
+          </div>
+
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {CASE_TYPES.map((item) => (
+              <li key={item.title} className="flex">
+                <AccordionItem title={item.title}>
+                  {item.description}
+                </AccordionItem>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* ── 4. How AppealKit Works ── */}
+        <section id="how-it-works" className="flex flex-col gap-8 scroll-mt-20">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+              How AppealKit works
+            </h2>
+            <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
+              Four focused steps from scattered documents to a download-ready appeal pack.
+            </p>
+          </div>
+
+          <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {HOW_IT_WORKS.map((item) => (
+              <li key={item.step} className="flex">
+                <AccordionItem
+                  badge={
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">
+                      {item.step}
+                    </span>
+                  }
+                  title={item.title}
+                >
+                  {item.description}
+                </AccordionItem>
+              </li>
+            ))}
+          </ol>
+
+          <div className="text-center">
+            <Link
+              href="/builder"
+              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700"
+            >
+              Start building — $4.99
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
+        </section>
+
+        {/* ── 5. What Goes Into Your Appeal Pack ── */}
+        <section className="flex flex-col gap-8">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+              What goes into your appeal pack
+            </h2>
+            <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
+              AppealKit structures your case into a consistent, readable format.
+            </p>
+          </div>
+
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {WHAT_GOES_IN.map((item) => (
+              <li key={item.title} className="flex">
+                <AccordionItem
+                  badge={
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                      {item.icon}
+                    </span>
+                  }
+                  title={item.title}
+                >
+                  {item.description}
+                </AccordionItem>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* ── 6. FAQ ── */}

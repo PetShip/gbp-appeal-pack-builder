@@ -129,6 +129,14 @@ export default function RootLayout({
                   <Link href="/faq" className="hover:text-slate-900 transition-colors">FAQ</Link>
                 </div>
                 <div className="flex flex-col gap-2">
+                  <span className="font-medium text-slate-700">Guides</span>
+                  <Link href="/guides/how-to-appeal-suspended-google-business-profile" className="hover:text-slate-900 transition-colors">How to appeal a suspension</Link>
+                  <Link href="/guides/google-business-profile-suspended-documents" className="hover:text-slate-900 transition-colors">Documents needed</Link>
+                  <Link href="/guides/google-business-profile-restricted-profile-appeal" className="hover:text-slate-900 transition-colors">Restricted profile appeal</Link>
+                  <Link href="/guides/business-information-mismatch-google-business-profile" className="hover:text-slate-900 transition-colors">Information mismatch</Link>
+                  <Link href="/guides/prepare-gbp-reinstatement-appeal-pack" className="hover:text-slate-900 transition-colors">Prepare an appeal pack</Link>
+                </div>
+                <div className="flex flex-col gap-2">
                   <span className="font-medium text-slate-700">Legal</span>
                   <Link href="/privacy" className="hover:text-slate-900 transition-colors">Privacy</Link>
                   <Link href="/tos" className="hover:text-slate-900 transition-colors">Terms</Link>

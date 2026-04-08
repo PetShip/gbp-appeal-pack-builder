@@ -24,7 +24,8 @@ export default function ReviewPage() {
     if (data) {
       trackEvent("review_reached", { case_type: data.caseType, page_location: "/review" });
     }
-  }, [data]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!data) {
     return (

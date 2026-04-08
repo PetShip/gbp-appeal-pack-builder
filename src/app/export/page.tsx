@@ -112,7 +112,7 @@ function ExportContent() {
           if (data.paid) {
             sessionStorage.setItem(PAID_KEY, "true");
             setPaid(true);
-            trackEvent("payment_success", { currency: "USD", payment_amount: 4.99 });
+            trackEvent("payment_success", { currency: "USD", payment_amount: PAYMENT_CONFIG.priceAmount });
             setPaymentJustCompleted(true);
           } else {
             setError("Payment could not be verified. Please contact support if you were charged.");
@@ -137,7 +137,7 @@ function ExportContent() {
   async function handlePay() {
     setPaymentLoading(true);
     setError(null);
-    trackEvent("checkout_started", { currency: "USD", payment_amount: 4.99 });
+    trackEvent("checkout_started", { currency: "USD", payment_amount: PAYMENT_CONFIG.priceAmount });
     try {
       const res = await fetch("/api/create-checkout-session", { method: "POST" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);

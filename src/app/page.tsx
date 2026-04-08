@@ -295,7 +295,7 @@ export default function Home() {
               href="#whats-included"
               className="inline-flex items-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-medium text-slate-600 border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
             >
-              See what&rsquo;s included
+              See what's included
             </a>
           </div>
 

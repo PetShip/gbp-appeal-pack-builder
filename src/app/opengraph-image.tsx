@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "ProofPack — Build dispute-ready evidence packs";
+export const alt = "AppealKit — Build your GBP reinstatement appeal pack";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -63,7 +63,7 @@ export default function OGImage() {
               letterSpacing: "-0.02em",
             }}
           >
-            ProofPack
+            AppealKit
           </span>
         </div>
 
@@ -81,8 +81,8 @@ export default function OGImage() {
           }}
         >
           Build a{" "}
-          <span style={{ color: "#059669" }}>dispute-ready</span>
-          {" "}evidence pack
+          <span style={{ color: "#059669" }}>structured appeal pack</span>
+          {" "}for your Google Business Profile
         </div>
 
         {/* Sub-headline */}
@@ -96,13 +96,13 @@ export default function OGImage() {
             marginBottom: 48,
           }}
         >
-          Organized, structured, and formatted for Stripe chargebacks —
-          in under 10 minutes.
+          Organised, structured, and formatted for GBP reinstatement —
+          in one session.
         </div>
 
         {/* Feature pills */}
         <div style={{ display: "flex", gap: 16 }}>
-          {["Guided builder", "Auto-generated timeline", "PDF export"].map((label) => (
+          {["Guided builder", "Structured PDF export", "No login required"].map((label) => (
             <div
               key={label}
               style={{
@@ -143,7 +143,7 @@ export default function OGImage() {
             fontWeight: 500,
           }}
         >
-          proofpack.pro
+          appealkit.pro
         </div>
       </div>
     ),

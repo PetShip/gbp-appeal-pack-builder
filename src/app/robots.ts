@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://gbpappealpack.com/sitemap.xml",
+    sitemap: "https://appealkit.pro/sitemap.xml",
   };
 }

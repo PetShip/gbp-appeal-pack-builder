@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://gbpappealpack.com";
+const BASE_URL = "https://appealkit.pro";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

@@ -3,7 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
-const BASE_URL = "https://gbpappealpack.com";
+const BASE_URL = "https://appealkit.pro";
 
 function resolveBaseUrl(): string {
   const raw =
@@ -15,34 +15,34 @@ function resolveBaseUrl(): string {
 export const metadata: Metadata = {
   metadataBase: new URL(resolveBaseUrl()),
   title: {
-    default: "GBP Appeal Pack Builder — Google Business Profile Reinstatement",
-    template: "%s | GBP Appeal Pack Builder",
+    default: "AppealKit — Google Business Profile Reinstatement Appeal Builder",
+    template: "%s | AppealKit",
   },
   description:
-    "Build a clean, structured appeal pack for your Google Business Profile reinstatement request. GBP Appeal Pack Builder helps you organise your evidence and export a ready-to-submit PDF in minutes.",
+    "Build a clean, structured appeal pack for your suspended or restricted Google Business Profile. AppealKit guides you through the inputs, organises your documents, and exports a ready-to-use PDF.",
   keywords: [
     "GBP reinstatement appeal",
     "Google Business Profile appeal",
     "GBP suspension appeal",
     "Google Business Profile reinstatement",
     "GBP appeal pack",
-    "Google Business Profile evidence",
+    "AppealKit",
   ],
-  authors: [{ name: "GBP Appeal Pack Builder", url: BASE_URL }],
+  authors: [{ name: "AppealKit", url: BASE_URL }],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: BASE_URL,
-    siteName: "GBP Appeal Pack Builder",
-    title: "GBP Appeal Pack Builder — Google Business Profile Reinstatement",
+    siteName: "AppealKit",
+    title: "AppealKit — Google Business Profile Reinstatement Appeal Builder",
     description:
-      "Build a clean, structured appeal pack for your Google Business Profile reinstatement request.",
+      "Build a clean, structured appeal pack for your suspended or restricted Google Business Profile.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GBP Appeal Pack Builder — Google Business Profile Reinstatement",
+    title: "AppealKit — Google Business Profile Reinstatement Appeal Builder",
     description:
-      "Build a clean, structured appeal pack for your Google Business Profile reinstatement request.",
+      "Build a clean, structured appeal pack for your suspended or restricted Google Business Profile.",
     images: ["/opengraph-image"],
   },
   robots: {
@@ -86,7 +86,7 @@ export default function RootLayout({
                 <rect x="4" y="14" width="5" height="1.5" rx="0.75" fill="white" opacity="0.6" />
               </svg>
               <span className="text-sm font-semibold text-slate-900 group-hover:text-emerald-600 transition-colors">
-                GBP Appeal Pack Builder
+                AppealKit
               </span>
             </Link>
             <nav className="flex items-center gap-1 text-sm">
@@ -100,7 +100,7 @@ export default function RootLayout({
                 href="/builder"
                 className="ml-1 rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
               >
-                Build your pack
+                Build your appeal pack
               </Link>
             </nav>
           </div>
@@ -115,9 +115,9 @@ export default function RootLayout({
             <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
               {/* Brand */}
               <div className="flex flex-col gap-2">
-                <span className="text-sm font-semibold text-slate-800">GBP Appeal Pack Builder</span>
+                <span className="text-sm font-semibold text-slate-800">AppealKit</span>
                 <p className="text-xs text-slate-400 max-w-xs leading-relaxed">
-                  Build a clean, structured appeal pack for your Google Business Profile reinstatement request.
+                  Build a clean, structured appeal pack for your suspended or restricted Google Business Profile.
                 </p>
               </div>
 
@@ -125,7 +125,7 @@ export default function RootLayout({
               <div className="flex flex-wrap gap-x-8 gap-y-3 text-xs text-slate-500">
                 <div className="flex flex-col gap-2">
                   <span className="font-medium text-slate-700">Product</span>
-                  <Link href="/builder" className="hover:text-slate-900 transition-colors">Build your pack</Link>
+                  <Link href="/builder" className="hover:text-slate-900 transition-colors">Build your appeal pack</Link>
                   <Link href="/faq" className="hover:text-slate-900 transition-colors">FAQ</Link>
                 </div>
                 <div className="flex flex-col gap-2">
@@ -140,7 +140,7 @@ export default function RootLayout({
 
             <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
               <span className="text-xs text-slate-400">
-                © {new Date().getFullYear()} GBP Appeal Pack Builder · gbpappealpack.com
+                © {new Date().getFullYear()} AppealKit · appealkit.pro
               </span>
               <span className="text-xs text-slate-300">
                 No account required · No data stored

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, Suspense } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import PageIllustration from "@/components/ui/PageIllustration";
@@ -57,8 +57,13 @@ function ExportContent() {
   const [error, setError] = useState<string | null>(null);
   const [diag, setDiag] = useState<FileDiag[] | null>(null);
   const [payloadBytes, setPayloadBytes] = useState(0);
-  // null = not yet checked (before mount effect runs), false = missing, true = found
-  const [caseDataFound, setCaseDataFound] = useState<boolean | null>(null);
+  // null = SSR / not yet readable, false = missing, true = found.
+  // Initialized synchronously on the client via a lazy initializer so the
+  // correct value is present from the very first render — before any effect runs.
+  const [caseDataFound, setCaseDataFound] = useState<boolean | null>(() => {
+    if (typeof window === "undefined") return null;
+    return readExportState().hasCaseData;
+  });
   const [paid, setPaid] = useState(!PAYMENT_GATE_ENABLED);
   const [paymentJustCompleted, setPaymentJustCompleted] = useState(false);
   const [paymentLoading, setPaymentLoading] = useState(false);
@@ -66,7 +71,6 @@ function ExportContent() {
   const [paymentCanceled, setPaymentCanceled] = useState(false);
 
   const searchParams = useSearchParams();
-  const router = useRouter();
 
   // Capture URL param values so they can be safely listed as effect dependencies
   const paymentSuccess = searchParams.get("payment_success");
@@ -88,7 +92,7 @@ function ExportContent() {
     // Returning from a canceled Stripe Checkout
     if (paymentCanceledParam === "1") {
       setPaymentCanceled(true);
-      router.replace("/export");
+      window.history.replaceState(null, "", "/export");
       return;
     }
 
@@ -117,11 +121,16 @@ function ExportContent() {
         })
         .finally(() => {
           setVerifying(false);
-          // Clean the query params from the URL without a full navigation
-          router.replace("/export");
+          // Clean the query params from the URL bar without triggering a React
+          // navigation. Using window.history.replaceState (instead of
+          // router.replace) avoids a Next.js router event that would update
+          // useSearchParams, re-run this effect, and potentially remount the
+          // Suspense-wrapped component — which was the root cause of the
+          // "No case data found" flash on successful payment returns.
+          window.history.replaceState(null, "", "/export");
         });
     }
-  }, [paymentSuccess, sessionId, paymentCanceledParam, router]);
+  }, [paymentSuccess, sessionId, paymentCanceledParam]);
 
   async function handlePay() {
     setPaymentLoading(true);

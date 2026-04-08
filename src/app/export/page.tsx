@@ -59,8 +59,10 @@ function ExportContent() {
   // null = not yet checked (before mount effect runs), false = missing, true = found
   const [caseDataFound, setCaseDataFound] = useState<boolean | null>(null);
   const [paid, setPaid] = useState(!PAYMENT_GATE_ENABLED);
+  const [paymentJustCompleted, setPaymentJustCompleted] = useState(false);
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [verifying, setVerifying] = useState(false);
+  const [paymentCanceled, setPaymentCanceled] = useState(false);
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -68,6 +70,7 @@ function ExportContent() {
   // Capture URL param values so they can be safely listed as effect dependencies
   const paymentSuccess = searchParams.get("payment_success");
   const sessionId = searchParams.get("session_id");
+  const paymentCanceledParam = searchParams.get("payment_canceled");
 
   // Read export state (diagnostics and payload size) once on mount (sessionStorage is only available client-side)
   useEffect(() => {
@@ -80,6 +83,13 @@ function ExportContent() {
   // Payment gate: verify Stripe session or check sessionStorage on mount
   useEffect(() => {
     if (!PAYMENT_GATE_ENABLED) return;
+
+    // Returning from a canceled Stripe Checkout
+    if (paymentCanceledParam === "1") {
+      setPaymentCanceled(true);
+      router.replace("/export");
+      return;
+    }
 
     // Already unlocked in this browser session
     if (sessionStorage.getItem(PAID_KEY) === "true") {
@@ -96,6 +106,7 @@ function ExportContent() {
           if (data.paid) {
             sessionStorage.setItem(PAID_KEY, "true");
             setPaid(true);
+            setPaymentJustCompleted(true);
           } else {
             setError("Payment could not be verified. Please contact support if you were charged.");
           }
@@ -109,7 +120,7 @@ function ExportContent() {
           router.replace("/export");
         });
     }
-  }, [paymentSuccess, sessionId, router]);
+  }, [paymentSuccess, sessionId, paymentCanceledParam, router]);
 
   async function handlePay() {
     setPaymentLoading(true);
@@ -191,6 +202,17 @@ function ExportContent() {
 
       <PayloadWarningBanner payloadBytes={payloadBytes} />
 
+      {/* Canceled notice — shown after returning from a canceled Stripe Checkout */}
+      {PAYMENT_GATE_ENABLED && !paid && paymentCanceled && (
+        <div className="flex items-start gap-2.5 rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-600">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="mt-0.5 shrink-0">
+            <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M7 4.5v3M7 9h.01" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+          </svg>
+          Checkout was canceled. You can try again whenever you&apos;re ready.
+        </div>
+      )}
+
       {/* Payment gate */}
       {PAYMENT_GATE_ENABLED && !paid && (
         <div className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -206,10 +228,10 @@ function ExportContent() {
             <>
               <div>
                 <h2 className="text-sm font-semibold text-slate-900">
-                  Unlock your appeal pack — {PAYMENT_CONFIG.priceDisplay}
+                  Your appeal pack is ready.
                 </h2>
                 <p className="mt-1 text-sm text-slate-500 leading-relaxed">
-                  One-time payment. Instant download. Your PDF is ready — pay to unlock it.
+                  Complete a one-time payment of {PAYMENT_CONFIG.priceDisplay} to unlock the final download.
                 </p>
               </div>
               <ul className="flex flex-col gap-1.5">
@@ -242,7 +264,7 @@ function ExportContent() {
                         <rect x="1" y="3.5" width="12" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
                         <path d="M1 6.5h12" stroke="currentColor" strokeWidth="1.4" />
                       </svg>
-                      Pay {PAYMENT_CONFIG.priceDisplay} to download
+                      Unlock download — {PAYMENT_CONFIG.priceDisplay}
                     </>
                   )}
                 </Button>
@@ -289,6 +311,15 @@ function ExportContent() {
           </div>
         ) : (
           <>
+          {/* Payment success notice */}
+          {PAYMENT_GATE_ENABLED && paymentJustCompleted && (
+            <div className="flex items-center gap-2.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-3 text-sm text-emerald-700">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="shrink-0">
+                <path d="M2 7l3.5 3.5L12 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Payment successful. Your download is now unlocked.
+            </div>
+          )}
           <div className="flex flex-col gap-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-start sm:gap-8">
             {/* Illustration */}
             <div className="mx-auto flex w-full max-w-[200px] shrink-0 items-center justify-center rounded-xl border border-slate-100 bg-slate-50 p-4 sm:mx-0 sm:w-56 sm:max-w-none">

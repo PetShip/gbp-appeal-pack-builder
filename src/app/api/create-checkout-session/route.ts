@@ -31,8 +31,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       success_url: `${baseUrl}/export?payment_success=1&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/export`,
-      metadata: { product: "gbp_appeal_pack" },
+      cancel_url: `${baseUrl}/export?payment_canceled=1`,
+      metadata: { product: "appealkit" },
     });
 
     return NextResponse.json({ url: session.url });

@@ -281,6 +281,23 @@ function ExportContent() {
                   </li>
                 ))}
               </ul>
+              <div className="rounded-lg border border-slate-100 bg-slate-50 px-3.5 py-3">
+                <p className="text-xs font-medium text-slate-500 mb-1.5">Payment does not include:</p>
+                <ul className="flex flex-col gap-1">
+                  {[
+                    "Legal advice or professional representation",
+                    "Direct submission to Google on your behalf",
+                    "Any guarantee of reinstatement",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-xs text-slate-400">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" className="shrink-0">
+                        <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
               <div className="flex items-center gap-4">
                 <Button onClick={handlePay} disabled={paymentLoading} className="gap-2">
                   {paymentLoading ? (
@@ -357,7 +374,7 @@ function ExportContent() {
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="shrink-0">
                 <path d="M2 7l3.5 3.5L12 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              Payment successful. Your download is now unlocked.
+              Payment confirmed. Your download is now unlocked — click <strong>Download PDF</strong> below.
             </div>
           )}
           <div className="flex flex-col gap-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-start sm:gap-8">
@@ -494,9 +511,12 @@ function ExportContent() {
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <p className="text-sm font-semibold text-emerald-900">Your appeal pack is ready</p>
+                <p className="text-sm font-semibold text-emerald-900">Your appeal pack has been downloaded</p>
                 <p className="text-sm text-emerald-700 leading-relaxed max-w-xs">
-                  Your PDF has been downloaded. You can now use it as part of your GBP reinstatement appeal.
+                  Your structured PDF is ready to include with your reinstatement request.
+                </p>
+                <p className="text-xs text-emerald-600 leading-relaxed max-w-xs">
+                  Submit your appeal directly through Google&apos;s own process — AppealKit does not submit on your behalf.
                 </p>
               </div>
               <Link

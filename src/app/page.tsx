@@ -311,7 +311,7 @@ export default function Home() {
             </span>
             <span className="flex items-center gap-1.5 font-medium text-slate-500">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l2.5 2.5L10 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              $4.99 one-time — no subscription
+              Free to build · $4.99 to download
             </span>
           </div>
 
@@ -442,16 +442,17 @@ export default function Home() {
             ))}
           </ol>
 
-          <div className="text-center">
+          <div className="flex flex-col items-center gap-1.5">
             <Link
               href="/builder"
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700"
             >
-              Start building — $4.99
+              Start building your appeal pack
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
+            <span className="text-xs text-slate-400">Free to build · $4.99 one-time to download</span>
           </div>
         </section>
 
@@ -503,7 +504,7 @@ export default function Home() {
               </svg>
             </Link>
             <span className="text-xs text-emerald-200">
-              $4.99 one-time payment · No account · No data stored
+              Free to build · $4.99 one-time to download · No account · No data stored
             </span>
           </div>
         </section>

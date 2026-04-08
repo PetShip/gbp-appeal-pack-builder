@@ -271,15 +271,14 @@ export default function Home() {
             AppealKit
           </p>
 
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 leading-tight max-w-xl">
-            Build a structured{" "}
-            <span className="text-emerald-600">GBP reinstatement appeal pack</span>{" "}
-            from your existing documents.
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 leading-tight max-w-lg">
+            Create a clean, structured appeal pack for a{" "}
+            <span className="text-emerald-600">suspended Google Business Profile.</span>
           </h1>
 
           <p className="text-base text-slate-500 leading-relaxed max-w-md">
-            AppealKit guides you through the inputs, organises your supporting documents, and exports
-            a clean PDF — ready to use with your Google Business Profile reinstatement request.
+            Use your existing business details and supporting documents to create a clearer, more
+            organised appeal pack — without starting from scratch.
           </p>
 
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
@@ -293,10 +292,10 @@ export default function Home() {
               </svg>
             </Link>
             <a
-              href="#how-it-works"
+              href="#whats-included"
               className="inline-flex items-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-medium text-slate-600 border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
             >
-              See how it works
+              See what&rsquo;s included
             </a>
           </div>
 
@@ -307,11 +306,11 @@ export default function Home() {
             </span>
             <span className="flex items-center gap-1.5">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l2.5 2.5L10 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              No data stored
+              One-time payment
             </span>
             <span className="flex items-center gap-1.5 font-medium text-slate-500">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l2.5 2.5L10 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              $4.99 one-time — no subscription
+              Structured PDF export
             </span>
           </div>
 
@@ -456,7 +455,7 @@ export default function Home() {
         </section>
 
         {/* ── 5. What Goes Into Your Appeal Pack ── */}
-        <section className="flex flex-col gap-8">
+        <section id="whats-included" className="flex flex-col gap-8 scroll-mt-20">
           <div className="text-center">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">
               What goes into your appeal pack

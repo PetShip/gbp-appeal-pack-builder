@@ -41,6 +41,7 @@ function readExportState(): ExportState {
 }
 
 const PAID_KEY = "gbp_paid";
+const NO_CASE_DATA_HEADING = "No case data found";
 
 export default function ExportPage() {
   return (
@@ -224,6 +225,29 @@ function ExportContent() {
               </svg>
               Verifying payment…
             </div>
+          ) : caseDataFound === false ? (
+            /* No case data — block checkout and send user to the builder */
+            <div className="flex flex-col items-center gap-4 py-2 text-center">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true" className="text-slate-300">
+                <rect x="7" y="5" width="22" height="26" rx="3" stroke="currentColor" strokeWidth="1.4" />
+                <path d="M12 13h12M12 18h8M12 23h5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+              <div className="flex flex-col gap-1">
+                <p className="text-sm font-semibold text-slate-900">{NO_CASE_DATA_HEADING}</p>
+                <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
+                  Please complete the builder before checking out — your case data is stored in this browser session.
+                </p>
+              </div>
+              <Link
+                href="/builder"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-600 hover:text-emerald-700"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Go to the builder
+              </Link>
+            </div>
           ) : (
             <>
               <div>
@@ -294,10 +318,17 @@ function ExportContent() {
               <path d="M14 14h12M14 19h8M14 24h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
             <div className="flex flex-col gap-1.5">
-              <p className="text-sm font-semibold text-slate-900">No case data found</p>
-              <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
-                It looks like your case hasn&apos;t been built yet, or your session has expired. Please complete the builder first.
-              </p>
+              <p className="text-sm font-semibold text-slate-900">{NO_CASE_DATA_HEADING}</p>
+              {PAYMENT_GATE_ENABLED && paid ? (
+                <p className="text-sm text-slate-500 max-w-sm leading-relaxed">
+                  Your payment was received — but your browser session has expired or no case was built in this tab.
+                  Your download is unlocked: complete the builder in this tab and return here to export your pack.
+                </p>
+              ) : (
+                <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
+                  It looks like your case hasn&apos;t been built yet, or your session has expired. Please complete the builder first.
+                </p>
+              )}
             </div>
             <Link
               href="/builder"

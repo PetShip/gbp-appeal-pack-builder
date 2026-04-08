@@ -14,7 +14,7 @@ export default function AccordionItem({ badge, title, link, children }: Accordio
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
+    <div className="rounded-xl border border-slate-200 bg-white shadow-sm h-full w-full">
       <div className="flex items-start gap-3 p-5">
         {badge && <div className="shrink-0">{badge}</div>}
         <div className="flex-1 min-w-0">

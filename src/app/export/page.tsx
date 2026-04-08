@@ -40,7 +40,7 @@ function readExportState(): ExportState {
   }
 }
 
-const PAID_KEY = "pp_paid";
+const PAID_KEY = "gbp_paid";
 
 export default function ExportPage() {
   return (

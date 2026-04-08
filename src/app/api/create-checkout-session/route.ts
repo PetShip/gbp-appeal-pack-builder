@@ -18,9 +18,11 @@ export async function POST(request: NextRequest) {
       return new NextResponse("Payment is not configured", { status: 500 });
     }
 
-    const baseUrl =
+    const rawBase =
       process.env.NEXT_PUBLIC_BASE_URL ??
-      `https://${request.headers.get("host") ?? "localhost:3000"}`;
+      request.headers.get("host") ??
+      "localhost:3000";
+    const baseUrl = rawBase.startsWith("http") ? rawBase : `https://${rawBase}`;
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",

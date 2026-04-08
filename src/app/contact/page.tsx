@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Contact Support | ProofPack",
+  title: "Contact Support | AppealKit",
   description:
-    "Get help with ProofPack. Contact our support team for billing questions, export issues, bug reports, or anything else.",
+    "Get help with AppealKit. Contact our support team for billing questions, export issues, bug reports, or anything else.",
   alternates: {
-    canonical: "https://proofpack.pro/contact",
+    canonical: "https://appealkit.pro/contact",
   },
   openGraph: {
-    title: "Contact Support | ProofPack",
+    title: "Contact Support | AppealKit",
     description:
-      "Get help with ProofPack. Contact our support team for billing questions, export issues, or bug reports.",
-    url: "https://proofpack.pro/contact",
+      "Get help with AppealKit. Contact our support team for billing questions, export issues, or bug reports.",
+    url: "https://appealkit.pro/contact",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
 };
@@ -29,9 +29,9 @@ const TOPICS = [
       "PDF generation failed, download did not start, or the output looks incorrect.",
   },
   {
-    label: "Evidence pack questions",
+    label: "Appeal pack questions",
     description:
-      "Unsure what to include, how the builder works, or how to structure your dispute pack.",
+      "Unsure what to include, how the builder works, or how to structure your appeal pack.",
   },
   {
     label: "Bug reports",
@@ -40,7 +40,7 @@ const TOPICS = [
   },
   {
     label: "General questions",
-    description: "Anything else about ProofPack or how it works.",
+    description: "Anything else about AppealKit or how it works.",
   },
 ];
 
@@ -51,15 +51,15 @@ const FAQ_ITEMS = [
   },
   {
     q: "Can I get a refund?",
-    a: "Yes. If the PDF failed to generate due to a technical error on our side, email support@proofpack.pro within 7 days of your purchase and we will issue a full refund. See our Terms of Service for details.",
+    a: "Yes. If the PDF failed to generate due to a technical error on our side, email support@appealkit.pro within 7 days of your purchase and we will issue a full refund. See our Terms of Service for details.",
   },
   {
     q: "I closed the tab and lost my session — can I recover it?",
     a: "Unfortunately, no. Session data is stored only in your browser's sessionStorage, which is cleared when you close the tab. There is no server-side backup. You will need to start a new session.",
   },
   {
-    q: "Does ProofPack guarantee I will win my dispute?",
-    a: "No. ProofPack helps you organize evidence clearly — dispute outcomes are decided by card networks and issuing banks, and are outside our control.",
+    q: "Does AppealKit guarantee my Google Business Profile will be reinstated?",
+    a: "No. AppealKit helps you structure and present your appeal clearly — reinstatement decisions are made solely by Google and are outside our control.",
   },
 ];
 
@@ -69,7 +69,7 @@ export default function ContactPage() {
       {/* Header */}
       <div className="flex flex-col gap-3">
         <p className="text-sm font-semibold tracking-widest text-emerald-600 uppercase">
-          ProofPack
+          AppealKit
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">Contact & Support</h1>
         <p className="text-base text-slate-500 leading-relaxed max-w-xl">
@@ -82,11 +82,11 @@ export default function ContactPage() {
       <section className="rounded-xl border border-emerald-200 bg-emerald-50 p-6 flex flex-col gap-3">
         <h2 className="text-base font-semibold text-slate-900">Send us an email</h2>
         <p className="text-sm text-slate-600 leading-relaxed">
-          Describe your issue or question and include any relevant details (order ID, dispute
+          Describe your issue or question and include any relevant details (order ID, appeal
           type, browser you are using). We will get back to you as soon as we can.
         </p>
         <a
-          href="mailto:support@proofpack.pro"
+          href="mailto:support@appealkit.pro"
           className="inline-flex items-center gap-2 self-start rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 transition-colors"
         >
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
@@ -95,7 +95,7 @@ export default function ContactPage() {
               fill="currentColor"
             />
           </svg>
-          support@proofpack.pro
+          support@appealkit.pro
         </a>
         <p className="text-xs text-slate-400">
           Expected response time: within one business day. No SLA — we are a small independent
@@ -160,7 +160,7 @@ export default function ContactPage() {
               strokeLinejoin="round"
             />
           </svg>
-          Back to ProofPack
+          Back to AppealKit
         </Link>
       </div>
     </div>

@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Imprint | ProofPack",
+  title: "Imprint | AppealKit",
   description:
-    "Legal information and company details for ProofPack (proofpack.pro).",
+    "Legal information and company details for AppealKit (appealkit.pro).",
   alternates: {
-    canonical: "https://proofpack.pro/imprint",
+    canonical: "https://appealkit.pro/imprint",
   },
   robots: {
     index: true,
@@ -20,11 +20,11 @@ export default function ImprintPage() {
       {/* Header */}
       <div className="flex flex-col gap-3">
         <p className="text-sm font-semibold tracking-widest text-emerald-600 uppercase">
-          ProofPack
+          AppealKit
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">Imprint</h1>
         <p className="text-base text-slate-500 leading-relaxed max-w-xl">
-          Legal information about the operator of proofpack.pro in accordance with applicable
+          Legal information about the operator of appealkit.pro in accordance with applicable
           disclosure requirements.
         </p>
       </div>
@@ -34,7 +34,7 @@ export default function ImprintPage() {
         <section className="flex flex-col gap-3">
           <h2 className="text-base font-semibold text-slate-900">Company Address</h2>
           <p className="text-sm text-slate-600 leading-relaxed">
-            ProofPack.pro<br />
+            AppealKit<br />
             Dorfstrasse 21a<br />
             6800 Feldkirch<br />
             AUSTRIA
@@ -46,19 +46,19 @@ export default function ImprintPage() {
           <p>
             Email:{" "}
             <a
-              href="mailto:support@proofpack.pro"
+              href="mailto:support@appealkit.pro"
               className="text-emerald-600 hover:text-emerald-700"
             >
-              support@proofpack.pro
+              support@appealkit.pro
             </a>
           </p>
           <p>
             Website:{" "}
             <a
-              href="https://proofpack.pro"
+              href="https://appealkit.pro"
               className="text-emerald-600 hover:text-emerald-700"
             >
-              proofpack.pro
+              appealkit.pro
             </a>
           </p>
         </section>
@@ -66,14 +66,15 @@ export default function ImprintPage() {
         <section className="flex flex-col gap-3">
           <h2 className="text-base font-semibold text-slate-900">Disclaimer</h2>
           <p>
-            The content on proofpack.pro is provided for general informational purposes only.
-            ProofPack is a document-structuring tool and does not provide legal advice. Dispute
-            outcomes are determined solely by card networks and issuing banks. ProofPack makes no
-            guarantee regarding the result of any dispute submission.
+            The content on appealkit.pro is provided for general informational purposes only.
+            AppealKit is a document-structuring tool and does not provide legal advice. AppealKit
+            does not submit appeals to Google on your behalf and makes no guarantee regarding
+            Google Business Profile reinstatement outcomes. Reinstatement decisions are made
+            solely by Google.
           </p>
           <p className="mt-2">
-            ProofPack is not affiliated with Stripe, Inc. References to Stripe are for
-            descriptive purposes only.
+            AppealKit is not affiliated with Google LLC. References to Google Business Profile
+            are for descriptive purposes only.
           </p>
         </section>
 
@@ -92,7 +93,7 @@ export default function ImprintPage() {
               strokeLinejoin="round"
             />
           </svg>
-          Back to ProofPack
+          Back to AppealKit
         </Link>
       </div>
     </div>

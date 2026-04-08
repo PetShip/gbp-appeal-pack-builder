@@ -4,17 +4,17 @@ import PageIllustration from "@/components/ui/PageIllustration";
 import AccordionItem from "@/components/ui/AccordionItem";
 
 export const metadata: Metadata = {
-  title: "ProofPack — Stripe Chargeback Evidence Builder | $4.99",
+  title: "AppealKit — Google Business Profile Reinstatement Appeal Builder",
   description:
-    "Turn scattered customer proof into a structured, dispute-ready evidence pack. ProofPack helps Stripe SaaS and digital product businesses organize chargeback evidence and respond to disputes in minutes. $4.99 one-time payment.",
+    "Build a clean, structured appeal pack for your suspended or restricted Google Business Profile. AppealKit guides you through the inputs, organises your documents, and exports a ready-to-use PDF. $4.99 one-time.",
   alternates: {
-    canonical: "https://proofpack.pro",
+    canonical: "https://appealkit.pro",
   },
   openGraph: {
-    title: "ProofPack — Stripe Chargeback Evidence Builder",
+    title: "AppealKit — Google Business Profile Reinstatement Appeal Builder",
     description:
-      "Turn scattered customer proof into a clean, dispute-ready evidence pack for Stripe SaaS and digital product disputes. $4.99 one-time payment.",
-    url: "https://proofpack.pro",
+      "Turn scattered business details and supporting documents into a structured GBP reinstatement appeal pack. No login. No stored data. $4.99 one-time.",
+    url: "https://appealkit.pro",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
 };
@@ -22,34 +22,35 @@ export const metadata: Metadata = {
 const HOW_IT_WORKS = [
   {
     step: "1",
-    title: "Choose your dispute type",
+    title: "Select your appeal type",
     description:
-      "Select the category that matches your case: unauthorized transaction, service not received, subscription not recognized, or product not as described.",
+      "Choose the category that fits your situation: documentation mismatch, business legitimacy proof, profile information cleanup, or restricted/disabled profile.",
   },
   {
     step: "2",
-    title: "Enter your case details",
+    title: "Enter your business and profile details",
     description:
-      "Add the order date, amount, product name, fulfillment details, and a summary of any customer communication.",
+      "Fill in structured fields for your business information, GBP profile details, and a summary of the suspension or restriction context.",
   },
   {
     step: "3",
-    title: "Upload supporting files",
+    title: "Upload supporting documents",
     description:
-      "Attach screenshots, receipts, email exports, or other documents. Each file is labeled and organized automatically.",
+      "Attach business licenses, utility bills, photos, registration certificates, or any other files that support your case.",
   },
   {
     step: "4",
-    title: "Download your evidence pack",
+    title: "Review and export your appeal pack",
     description:
-      "Pay a one-time $4.99 fee and download a structured PDF — case summary, auto-generated timeline, and all uploaded evidence — ready to submit to Stripe.",
+      "Review the complete case summary, then pay a one-time $4.99 fee and download a structured PDF — organised and ready to use with your reinstatement request.",
   },
 ];
 
 const WHAT_GOES_IN = [
   {
-    title: "Case summary",
-    description: "Customer name, order date, amount, product, and dispute type in a clean structured layout.",
+    title: "Business and profile summary",
+    description:
+      "Business name, address, category, and GBP profile details structured in a clear, readable layout.",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
         <rect x="2" y="2" width="14" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.3" />
@@ -58,37 +59,20 @@ const WHAT_GOES_IN = [
     ),
   },
   {
-    title: "Evidence timeline",
-    description: "An auto-generated chronological sequence: purchase, fulfillment, customer contact, and dispute date.",
+    title: "Appeal type and case context",
+    description:
+      "The specific appeal category, a description of the issue, and any corrective actions taken — written in your own words.",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
         <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.3" />
-        <path d="M9 5.5v4l2.5 2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M9 8v4M9 6h.01" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
       </svg>
     ),
   },
   {
-    title: "Product and fulfillment details",
-    description: "A clear description of what was sold, how it was delivered, and when access was granted.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <rect x="2" y="5" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.3" />
-        <path d="M5 5V4a4 4 0 018 0v1" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Customer communication log",
-    description: "A structured summary of relevant emails, tickets, or messages exchanged before the dispute.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <path d="M3 4h12a1 1 0 011 1v7a1 1 0 01-1 1H5l-3 2V5a1 1 0 011-1z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Uploaded evidence files",
-    description: "Screenshots and images rendered inline. PDFs appended as additional pages. Other files listed by name.",
+    title: "Supporting document list",
+    description:
+      "All uploaded files are labelled and indexed. Images are rendered inline; PDFs are appended as additional pages.",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
         <path d="M10 2H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7L10 2z" stroke="currentColor" strokeWidth="1.3" />
@@ -97,12 +81,13 @@ const WHAT_GOES_IN = [
     ),
   },
   {
-    title: "Additional context",
-    description: "Policy notes, unusual circumstances, or any other detail the reviewer needs to understand your case.",
+    title: "Profile consistency overview",
+    description:
+      "A structured section highlighting where your official records align with your GBP profile — useful for documentation mismatch cases.",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.3" />
-        <path d="M9 8v4M9 6h.01" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+        <rect x="2" y="5" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.3" />
+        <path d="M5 5V4a4 4 0 018 0v1" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -111,98 +96,97 @@ const WHAT_GOES_IN = [
 const TRUST_POINTS = [
   {
     title: "No login required",
-    description: "Start building immediately. No account, no signup form, no email confirmation.",
+    description:
+      "Start building immediately. No account, no signup form, no email confirmation needed.",
   },
   {
     title: "No data stored",
-    description: "Everything runs in your browser session. Nothing is saved to a server or database. Your case stays private.",
+    description:
+      "Everything runs in your browser session. Nothing is saved to a server or database. Your case information stays private.",
   },
   {
     title: "Structured, not generic",
-    description: "The output is organized around the specific evidence types card networks look for in dispute reviews.",
+    description:
+      "The builder guides you through fields specific to GBP suspension cases — not a blank form or a generic template.",
   },
   {
-    title: "Built for SaaS and digital products",
-    description: "The fields, prompts, and structure are designed around the realities of software subscriptions and digital goods — not physical retail.",
+    title: "Built for GBP appeal preparation",
+    description:
+      "The inputs, prompts, and export format are designed around what a GBP reinstatement request typically requires.",
   },
 ];
 
 const FOR_WHO = [
-  "Stripe-based SaaS products",
-  "Online course and digital download sellers",
-  "Subscription software businesses",
-  "Freelancers and consultants facing payment disputes",
-  "Any digital business that needs to respond to Stripe chargebacks",
+  "Small and mid-sized businesses with a suspended GBP listing",
+  "Local service businesses handling their own reinstatement",
+  "Business owners managing a restricted or disabled profile",
+  "Agencies preparing appeal documentation for a client",
 ];
 
 const NOT_FOR = [
-  "Physical goods with shipping disputes",
-  "Businesses not using Stripe",
-  "Cases that require legal representation",
+  "Businesses that need legal representation",
+  "Cases requiring direct submission to Google (AppealKit does not submit on your behalf)",
+  "Businesses needing a stored account or multi-session workflow",
 ];
 
-const DISPUTE_TYPES = [
+const CASE_TYPES = [
   {
-    title: "Unauthorized transaction",
+    title: "Documentation mismatch",
     description:
-      "The cardholder claims they did not authorize the payment. Evidence typically includes login records, IP addresses, and device confirmation.",
-    link: "/unauthorized-transaction-evidence",
+      "The business name, address, or category on the GBP profile does not match official records. Use this type to organise supporting documents that confirm the correct details.",
   },
   {
-    title: "Service not received",
+    title: "Business legitimacy proof",
     description:
-      "The customer claims they never received access to the product or service they paid for. Delivery confirmation and access logs are key.",
-    link: "/service-not-received-evidence",
+      "Google requires proof that the business is real, operating, and eligible for a GBP listing. Use this type to gather registration records, operational evidence, and photos.",
   },
   {
-    title: "Subscription canceled or not recognized",
+    title: "Profile information cleanup",
     description:
-      "The customer disputes a recurring charge, often claiming they canceled or don't recognize the billing. Subscription history and cancellation records are essential.",
-    link: "/subscription-canceled-evidence",
+      "The GBP profile contains outdated, inaccurate, or duplicate information that needs correction. Use this type to document what is wrong and provide the correct current details.",
   },
   {
-    title: "Product not as described",
+    title: "Restricted or disabled profile",
     description:
-      "The customer claims the product or service did not match what was advertised or promised. Documentation of what was delivered compared to what was listed is key.",
-    link: "/product-not-as-described-evidence",
+      "The GBP profile has been suspended, restricted, or disabled and requires reinstatement. Use this type to document compliance, business legitimacy, and any corrective actions taken.",
   },
 ];
 
 const FAQ_ITEMS = [
   {
-    q: "What is a chargeback evidence pack?",
-    a: "When a customer disputes a charge with their bank, Stripe (and the card network) asks the merchant to respond with documented evidence. A well-organized evidence pack typically includes a case summary, a chronological timeline of events, proof of delivery or fulfillment, customer communication records, and supporting files like screenshots or receipts.",
+    q: "What is AppealKit?",
+    a: "AppealKit is a focused web utility that helps local businesses build a structured appeal pack for a suspended or restricted Google Business Profile. You enter your business details and supporting context, upload documents, and download a clean PDF — organised and ready to use with your reinstatement request.",
   },
   {
-    q: "Does ProofPack guarantee I will win my dispute?",
-    a: "No. ProofPack helps you organize and structure your evidence — it does not predict or influence dispute outcomes. Whether a dispute is decided in your favor depends on the evidence, the dispute reason code, the card network's rules, and the bank's judgment.",
+    q: "Does AppealKit guarantee reinstatement?",
+    a: "No. AppealKit helps you organise and present your information clearly — it does not predict, influence, or guarantee reinstatement outcomes. Whether your appeal is successful depends on your specific case, the evidence you provide, and Google's review process. AppealKit is a structuring tool, not legal advice.",
   },
   {
-    q: "Is my case data saved anywhere?",
-    a: "No. All data you enter is stored only in your browser's sessionStorage for the duration of your current session. Nothing is sent to or stored on ProofPack servers. When you close the tab, the data is gone.",
+    q: "Does AppealKit submit the appeal to Google?",
+    a: "No. AppealKit produces a structured PDF pack that you can use as part of your own reinstatement request. You submit your appeal directly through Google's own process. AppealKit has no integration with Google.",
   },
   {
-    q: "What file types can I upload as evidence?",
-    a: "You can upload JPEG and PNG screenshots (rendered inline in the PDF), PDFs (appended as additional pages), and other file types (listed in the evidence index). Total upload size is limited to approximately 4–5 MB due to browser and export constraints.",
+    q: "Do I need to create an account?",
+    a: "No. AppealKit requires no login or signup. You start building immediately and the entire session runs in your browser.",
   },
   {
-    q: "Can I edit the PDF after downloading?",
-    a: "The exported PDF is not locked, so you can annotate it with a standard PDF editor. However, ProofPack does not include a built-in editing step — the output is meant to be complete as generated.",
+    q: "Is my data saved anywhere?",
+    a: "No. All information you enter is stored only in your browser's sessionStorage for the duration of your current session. Nothing is sent to or retained on AppealKit servers. When you close the tab, the data is gone — so complete your appeal pack in one session.",
   },
   {
-    q: "What dispute types does ProofPack support?",
-    a: "ProofPack currently supports four dispute types: unauthorized transaction, service not received, subscription canceled or not recognized, and product not as described. These cover the most common Stripe chargeback scenarios for SaaS and digital product businesses.",
+    q: "What case types does AppealKit support?",
+    a: "AppealKit currently supports four appeal types: documentation mismatch, business legitimacy proof, profile information cleanup, and restricted or disabled profile. These cover the most common GBP suspension and restriction scenarios.",
   },
 ];
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "ProofPack",
-  url: "https://proofpack.pro",
+  name: "AppealKit",
+  url: "https://appealkit.pro",
   applicationCategory: "BusinessApplication",
   description:
-    "Turn scattered customer proof into a clean, dispute-ready evidence pack for Stripe SaaS and digital product disputes.",
+    "Build a clean, structured appeal pack for a suspended or restricted Google Business Profile.",
   operatingSystem: "Web",
   offers: {
     "@type": "Offer",
@@ -242,22 +226,22 @@ export default function Home() {
         <section className="flex flex-col items-center gap-7 text-center pt-4">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            For Stripe-based SaaS &amp; digital products
+            For suspended or restricted Google Business Profiles
           </span>
 
           <p className="text-sm font-semibold tracking-widest text-emerald-600 uppercase">
-            ProofPack
+            AppealKit
           </p>
 
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 leading-tight max-w-xl">
-            Build a structured, dispute-ready{" "}
-            <span className="text-emerald-600">Stripe chargeback evidence pack</span>{" "}
-            in minutes.
+            Build a structured{" "}
+            <span className="text-emerald-600">GBP reinstatement appeal pack</span>{" "}
+            from your existing documents.
           </h1>
 
           <p className="text-base text-slate-500 leading-relaxed max-w-md">
-            Organize your case summary, fulfillment records, customer communication, and supporting
-            files into one structured PDF — ready to submit to Stripe.
+            AppealKit guides you through the inputs, organises your supporting documents, and exports
+            a clean PDF — ready to use with your Google Business Profile reinstatement request.
           </p>
 
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
@@ -265,7 +249,7 @@ export default function Home() {
               href="/builder"
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700 active:bg-emerald-800"
             >
-              Build your evidence pack
+              Build your appeal pack
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -297,7 +281,7 @@ export default function Home() {
           <div className="w-full max-w-[500px]">
             <PageIllustration
               src="/illustrations/hero-proof-organization.png"
-              alt="Documents being organized and reviewed into a structured evidence pack"
+              alt="Business documents being organised into a structured GBP appeal pack"
               width={800}
               height={600}
               withPanel
@@ -306,14 +290,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 2. How ProofPack Works ── */}
+        {/* ── 2. How AppealKit Works ── */}
         <section id="how-it-works" className="flex flex-col gap-8 scroll-mt-20">
           <div className="text-center">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-              How ProofPack works
+              How AppealKit works
             </h2>
             <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
-              Four focused steps from dispute details to a download-ready evidence pack.
+              Four focused steps from scattered documents to a download-ready appeal pack.
             </p>
           </div>
 
@@ -350,14 +334,65 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 3. Why Businesses Use ProofPack ── */}
+        {/* ── 3. Supported Case Types ── */}
+        <section className="flex flex-col gap-6">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+              Supported case types
+            </h2>
+            <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
+              AppealKit covers the four most common GBP suspension and restriction scenarios.
+            </p>
+          </div>
+
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {CASE_TYPES.map((item) => (
+              <li key={item.title}>
+                <AccordionItem title={item.title}>
+                  {item.description}
+                </AccordionItem>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* ── 4. What Goes Into Your Appeal Pack ── */}
         <section className="flex flex-col gap-8">
           <div className="text-center">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-              Why businesses use ProofPack
+              What goes into your appeal pack
             </h2>
             <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
-              Built around one practical goal: getting your evidence organized and submitted clearly.
+              AppealKit structures your case into a consistent, readable format.
+            </p>
+          </div>
+
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {WHAT_GOES_IN.map((item) => (
+              <li key={item.title}>
+                <AccordionItem
+                  badge={
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                      {item.icon}
+                    </span>
+                  }
+                  title={item.title}
+                >
+                  {item.description}
+                </AccordionItem>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* ── 5. Why Businesses Use AppealKit ── */}
+        <section className="flex flex-col gap-8">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+              Why businesses use AppealKit
+            </h2>
+            <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
+              Built around one practical goal: getting your case organised and presented clearly.
             </p>
           </div>
 
@@ -386,7 +421,7 @@ export default function Home() {
           {/* Who it's for / not for */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-6">
-              <h3 className="text-base font-semibold text-emerald-900 mb-4">Who ProofPack is for</h3>
+              <h3 className="text-base font-semibold text-emerald-900 mb-4">Who AppealKit is for</h3>
               <ul className="flex flex-col gap-2.5">
                 {FOR_WHO.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-emerald-800">
@@ -399,7 +434,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-6">
-              <h3 className="text-base font-semibold text-slate-700 mb-4">Who it&apos;s not designed for</h3>
+              <h3 className="text-base font-semibold text-slate-700 mb-4">What AppealKit does not do</h3>
               <ul className="flex flex-col gap-2.5">
                 {NOT_FOR.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-slate-500">
@@ -414,97 +449,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 4. Supported Dispute Types ── */}
-        <section className="flex flex-col gap-6">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-              Supported dispute types
-            </h2>
-            <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
-              ProofPack covers the four most common Stripe chargeback reason codes for SaaS and digital products.
-            </p>
-          </div>
-
-          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {DISPUTE_TYPES.map((item) => (
-              <li key={item.title}>
-                <AccordionItem
-                  title={item.title}
-                  link={{ href: item.link, label: "What evidence to gather" }}
-                >
-                  {item.description}
-                </AccordionItem>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* ── 5. CTA ── */}
-        <section className="rounded-2xl bg-emerald-600 px-8 py-12 text-center flex flex-col items-center gap-5">
-          <h2 className="text-2xl font-bold tracking-tight text-white">
-            Ready to build your evidence pack?
-          </h2>
-          <p className="text-sm text-emerald-100 max-w-sm leading-relaxed">
-            No login, no setup. Build and download your structured, dispute-ready evidence pack in under 10 minutes.
-          </p>
-          <div className="flex flex-col items-center gap-2">
-            <Link
-              href="/builder"
-              className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-emerald-700 shadow-sm transition-colors hover:bg-emerald-50 active:bg-emerald-100"
-            >
-              Build your evidence pack
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-            <span className="text-xs text-emerald-200">
-              $4.99 one-time payment · No account · No data stored
-            </span>
-          </div>
-        </section>
-
-        {/* ── 6. What Goes Into Your Evidence Pack ── */}
-        <section className="flex flex-col gap-8">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-              What goes into your evidence pack
-            </h2>
-            <p className="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
-              ProofPack structures your case around the evidence types that dispute reviewers actually look for.
-            </p>
-          </div>
-
-          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {WHAT_GOES_IN.map((item) => (
-              <li key={item.title}>
-                <AccordionItem
-                  badge={
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
-                      {item.icon}
-                    </span>
-                  }
-                  title={item.title}
-                >
-                  {item.description}
-                </AccordionItem>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* ── 7. Image ── */}
-        <section className="flex flex-col gap-4">
-          <div className="w-full overflow-hidden rounded-2xl">
-            <PageIllustration
-              src="/illustrations/00_Professionelle Interaktionen mit ProofPack-Software.png"
-              alt="Professional interactions with ProofPack software"
-              width={1200}
-              height={800}
-            />
-          </div>
-        </section>
-
-        {/* ── 8. FAQ ── */}
+        {/* ── 6. FAQ ── */}
         <section className="flex flex-col gap-8">
           <div className="text-center">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">
@@ -532,46 +477,29 @@ export default function Home() {
               View all frequently asked questions →
             </Link>
           </div>
+        </section>
 
-          <div className="rounded-xl border border-slate-100 bg-slate-50 p-5">
-            <p className="text-sm font-medium text-slate-700 mb-3">Related guides</p>
-            <ul className="flex flex-col gap-2 text-sm text-slate-500">
-              <li>
-                <Link href="/stripe-chargeback-evidence" className="text-emerald-600 hover:text-emerald-700">
-                  What to include in a Stripe chargeback evidence pack
-                </Link>
-              </li>
-              <li>
-                <Link href="/digital-product-chargeback-evidence" className="text-emerald-600 hover:text-emerald-700">
-                  Chargeback evidence for digital products and SaaS
-                </Link>
-              </li>
-              <li>
-                <Link href="/chargeback-evidence-template" className="text-emerald-600 hover:text-emerald-700">
-                  Evidence template: sections every dispute pack should include
-                </Link>
-              </li>
-              <li>
-                <Link href="/unauthorized-transaction-evidence" className="text-emerald-600 hover:text-emerald-700">
-                  Unauthorized transaction: login records, IP data, and device evidence
-                </Link>
-              </li>
-              <li>
-                <Link href="/service-not-received-evidence" className="text-emerald-600 hover:text-emerald-700">
-                  Service not received: proving delivery and access
-                </Link>
-              </li>
-              <li>
-                <Link href="/subscription-canceled-evidence" className="text-emerald-600 hover:text-emerald-700">
-                  Subscription disputes: cancellation records and billing history
-                </Link>
-              </li>
-              <li>
-                <Link href="/product-not-as-described-evidence" className="text-emerald-600 hover:text-emerald-700">
-                  Product not as described: comparing advertised vs. delivered
-                </Link>
-              </li>
-            </ul>
+        {/* ── 7. Final CTA ── */}
+        <section className="rounded-2xl bg-emerald-600 px-8 py-12 text-center flex flex-col items-center gap-5">
+          <h2 className="text-2xl font-bold tracking-tight text-white">
+            Ready to build your appeal pack?
+          </h2>
+          <p className="text-sm text-emerald-100 max-w-sm leading-relaxed">
+            No login, no setup. Organise your business details and supporting documents into a structured GBP appeal pack in one session.
+          </p>
+          <div className="flex flex-col items-center gap-2">
+            <Link
+              href="/builder"
+              className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-emerald-700 shadow-sm transition-colors hover:bg-emerald-50 active:bg-emerald-100"
+            >
+              Build your appeal pack
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+            <span className="text-xs text-emerald-200">
+              $4.99 one-time payment · No account · No data stored
+            </span>
           </div>
         </section>
 

@@ -9,6 +9,7 @@ import { EvidenceFile } from "@/types/case";
 import { estimatePayloadBytes } from "@/lib/payload-size";
 import PayloadWarningBanner from "@/components/ui/PayloadWarningBanner";
 import { PAYMENT_GATE_ENABLED, PAYMENT_CONFIG } from "@/lib/payment-config";
+import { trackEvent } from "@/lib/analytics";
 
 type FileDiag = { name: string; type: string; sizeKb: string; hasData: boolean; dataChars: number };
 
@@ -111,6 +112,7 @@ function ExportContent() {
           if (data.paid) {
             sessionStorage.setItem(PAID_KEY, "true");
             setPaid(true);
+            trackEvent("payment_success", { currency: "USD", payment_amount: 4.99 });
             setPaymentJustCompleted(true);
           } else {
             setError("Payment could not be verified. Please contact support if you were charged.");
@@ -135,6 +137,7 @@ function ExportContent() {
   async function handlePay() {
     setPaymentLoading(true);
     setError(null);
+    trackEvent("checkout_started", { currency: "USD", payment_amount: 4.99 });
     try {
       const res = await fetch("/api/create-checkout-session", { method: "POST" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -191,6 +194,7 @@ function ExportContent() {
       }
       a.click();
       URL.revokeObjectURL(url);
+      trackEvent("pdf_downloaded", { page_location: "/export" });
       setDownloaded(true);
     } catch (err) {
       console.error("[Export] unexpected error:", err);

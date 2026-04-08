@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://proofpack.pro/stripe-chargeback-evidence",
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     title: "Stripe Chargeback Evidence — ProofPack Guide",
     description:

@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://proofpack.pro/service-not-received-evidence",
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     title: "Service Not Received Chargeback Evidence — What to Include",
     description:

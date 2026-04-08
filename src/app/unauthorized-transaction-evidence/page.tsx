@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://proofpack.pro/unauthorized-transaction-evidence",
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     title: "Unauthorized Transaction Chargeback Evidence — What to Include",
     description:

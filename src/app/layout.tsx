@@ -5,13 +5,15 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const BASE_URL = "https://gbpappealpack.com";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(
+function resolveBaseUrl(): string {
+  const raw =
     process.env.NEXT_PUBLIC_BASE_URL ??
-      (process.env.NODE_ENV === "development"
-        ? "http://localhost:3000"
-        : BASE_URL)
-  ),
+    (process.env.NODE_ENV === "development" ? "http://localhost:3000" : BASE_URL);
+  return /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+}
+
+export const metadata: Metadata = {
+  metadataBase: new URL(resolveBaseUrl()),
   title: {
     default: "GBP Appeal Pack Builder — Google Business Profile Reinstatement",
     template: "%s | GBP Appeal Pack Builder",

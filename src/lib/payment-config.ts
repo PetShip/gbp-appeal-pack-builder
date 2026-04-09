@@ -5,6 +5,8 @@
 export const PAYMENT_CONFIG = {
   /** Display price shown to users (UI only — actual charge is set on the Stripe Price object). */
   priceDisplay: "$4.99",
+  /** Numeric price in USD — used for analytics event parameters. */
+  priceAmount: 4.99,
   /** Stripe Price ID — set via STRIPE_PRICE_ID env var. */
   stripePriceId: process.env.STRIPE_PRICE_ID ?? "",
   /** Product name — used for reference; actual name on Stripe Checkout comes from the Stripe Price object. */

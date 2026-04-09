@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageIllustration from "@/components/ui/PageIllustration";
 import AccordionItem from "@/components/ui/AccordionItem";
+import LandingCtaLink from "@/components/ui/LandingCtaLink";
 
 export const metadata: Metadata = {
   title: "AppealKit — Google Business Profile Reinstatement Appeal Builder",
@@ -282,15 +283,12 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-            <Link
-              href="/builder"
-              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700 active:bg-emerald-800"
-            >
+            <LandingCtaLink className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700 active:bg-emerald-800">
               Build your appeal pack
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </Link>
+            </LandingCtaLink>
             <a
               href="#whats-included"
               className="inline-flex items-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-medium text-slate-600 border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
@@ -441,16 +439,17 @@ export default function Home() {
             ))}
           </ol>
 
-          <div className="text-center">
+          <div className="flex flex-col items-center gap-1.5">
             <Link
               href="/builder"
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700"
             >
-              Start building — $4.99
+              Start building your appeal pack
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
+            <span className="text-xs text-slate-400">Free to build · $4.99 one-time to download</span>
           </div>
         </section>
 
@@ -502,7 +501,7 @@ export default function Home() {
               </svg>
             </Link>
             <span className="text-xs text-emerald-200">
-              $4.99 one-time payment · No account · No data stored
+              Free to build · $4.99 one-time to download · No account · No data stored
             </span>
           </div>
         </section>

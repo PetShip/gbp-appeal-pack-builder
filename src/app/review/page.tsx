@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CaseData } from "@/types/case";
 import ReviewSummary from "@/components/forms/ReviewSummary";
@@ -8,6 +8,7 @@ import { estimatePayloadBytes } from "@/lib/payload-size";
 import PayloadWarningBanner from "@/components/ui/PayloadWarningBanner";
 import StepIllustration from "@/components/ui/StepIllustration";
 import PageIllustration from "@/components/ui/PageIllustration";
+import { trackEvent } from "@/lib/analytics";
 
 function loadCaseData(): Partial<CaseData> | null {
   if (typeof window === "undefined") return null;
@@ -18,6 +19,13 @@ function loadCaseData(): Partial<CaseData> | null {
 export default function ReviewPage() {
   // Read sessionStorage once on mount via lazy state initializer
   const [data] = useState<Partial<CaseData> | null>(loadCaseData);
+
+  useEffect(() => {
+    if (data) {
+      trackEvent("review_reached", { case_type: data.caseType, page_location: "/review" });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!data) {
     return (
@@ -53,12 +61,15 @@ export default function ReviewPage() {
           </div>
           <Link
             href="/export"
-            className="shrink-0 inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700"
+            className="shrink-0 inline-flex flex-col items-end gap-0.5"
           >
-            Export PDF
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <span className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700">
+              Export PDF
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <span className="text-xs text-slate-400 pr-0.5">One-time $4.99 to download</span>
           </Link>
         </div>
         <div className="mx-auto w-full max-w-[240px] shrink-0 sm:mx-0 sm:max-w-[260px]">
@@ -89,12 +100,15 @@ export default function ReviewPage() {
         </Link>
         <Link
           href="/export"
-          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700"
+          className="inline-flex flex-col items-end gap-0.5"
         >
-          Export PDF
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <span className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700">
+            Export PDF
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          <span className="text-xs text-slate-400 pr-0.5">One-time $4.99 to download</span>
         </Link>
       </div>
     </div>

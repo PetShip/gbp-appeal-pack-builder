@@ -10,6 +10,7 @@ import EvidenceUploadStep from "@/components/forms/EvidenceUploadStep";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import FileUpload from "@/components/ui/FileUpload";
+import { trackEvent } from "@/lib/analytics";
 
 const EMPTY_CASE: Partial<CaseData> = {
   caseType: undefined,
@@ -68,6 +69,7 @@ export default function CaseForm({ onComplete }: CaseFormProps) {
     if (step === 0) {
       const result = validateStep0(data);
       if (!result.valid) { setErrors(result.errors); return; }
+      trackEvent("builder_started", { case_type: data.caseType });
     }
     if (step === 1) {
       const result = validateStep1(data);

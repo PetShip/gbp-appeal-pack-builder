@@ -183,7 +183,7 @@ export async function generatePdfBuffer(data: CaseData): Promise<Buffer> {
       .fontSize(8)
       .font("Helvetica")
       .fillColor("#aaaaaa")
-      .text("Created with ProofPack · proofpack.pro", { align: "center" })
+      .text("Created with AppealKit · appealkit.pro", { align: "center" })
       .fillColor("#000000");
 
     doc.end();

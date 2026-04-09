@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useRef } from "react";
+import { ChangeEvent, DragEvent, useRef, useState } from "react";
 import { EvidenceFile } from "@/types/case";
 import { formatSize, FILE_SIZE_WARN_BYTES, FILE_SIZE_MAX_BYTES } from "@/lib/utils";
 
@@ -13,9 +13,9 @@ type FileUploadProps = {
 
 export default function FileUpload({ label, helperText, files, onChange }: FileUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isDragOver, setIsDragOver] = useState(false);
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    const selected = Array.from(e.target.files ?? []);
+  function readFiles(selected: File[]) {
     if (selected.length === 0) return;
 
     // Read each file as base64 immediately so the content is embedded in the
@@ -46,9 +46,30 @@ export default function FileUpload({ label, helperText, files, onChange }: FileU
         onChange([...files, ...evidenceFiles]);
       })
       .catch((err) => console.error("[FileUpload] read failed:", err));
+  }
 
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    const selected = Array.from(e.target.files ?? []);
+    readFiles(selected);
     // Reset so the same file can be re-added if needed
     if (inputRef.current) inputRef.current.value = "";
+  }
+
+  function handleDragOver(e: DragEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setIsDragOver(true);
+  }
+
+  function handleDragLeave(e: DragEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setIsDragOver(false);
+  }
+
+  function handleDrop(e: DragEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setIsDragOver(false);
+    const selected = Array.from(e.dataTransfer.files);
+    readFiles(selected);
   }
 
   function handleRemove(index: number) {
@@ -74,7 +95,14 @@ export default function FileUpload({ label, helperText, files, onChange }: FileU
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className="group flex flex-col items-center gap-2 rounded-xl border-2 border-dashed border-slate-300 px-6 py-8 text-center transition-colors duration-150 hover:border-emerald-400 hover:bg-emerald-50/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        className={`group flex flex-col items-center gap-2 rounded-xl border-2 border-dashed px-6 py-8 text-center transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+          isDragOver
+            ? "border-emerald-400 bg-emerald-50"
+            : "border-slate-300 hover:border-emerald-400 hover:bg-emerald-50/50"
+        }`}
       >
         {/* Upload icon */}
         <svg
@@ -83,7 +111,7 @@ export default function FileUpload({ label, helperText, files, onChange }: FileU
           viewBox="0 0 32 32"
           fill="none"
           aria-hidden="true"
-          className="text-slate-400 group-hover:text-emerald-500 transition-colors"
+          className={`transition-colors ${isDragOver ? "text-emerald-500" : "text-slate-400 group-hover:text-emerald-500"}`}
         >
           <rect x="6" y="20" width="20" height="6" rx="3" fill="currentColor" opacity="0.15" />
           <path
@@ -101,8 +129,8 @@ export default function FileUpload({ label, helperText, files, onChange }: FileU
             opacity="0.4"
           />
         </svg>
-        <span className="text-sm font-medium text-slate-600 group-hover:text-emerald-700 transition-colors">
-          Click to upload files
+        <span className={`text-sm font-medium transition-colors ${isDragOver ? "text-emerald-700" : "text-slate-600 group-hover:text-emerald-700"}`}>
+          {isDragOver ? "Drop files here" : "Click or drag files here"}
         </span>
         <span className="text-xs text-slate-400">
           Images, PDFs, or other documents
@@ -175,4 +203,3 @@ export default function FileUpload({ label, helperText, files, onChange }: FileU
     </div>
   );
 }
-

@@ -14,6 +14,7 @@ type FileUploadProps = {
 export default function FileUpload({ label, helperText, files, onChange }: FileUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragOver, setIsDragOver] = useState(false);
+  const dragCounterRef = useRef(0);
 
   function readFiles(selected: File[]) {
     if (selected.length === 0) return;
@@ -57,16 +58,25 @@ export default function FileUpload({ label, helperText, files, onChange }: FileU
 
   function handleDragOver(e: DragEvent<HTMLButtonElement>) {
     e.preventDefault();
+  }
+
+  function handleDragEnter(e: DragEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    dragCounterRef.current += 1;
     setIsDragOver(true);
   }
 
   function handleDragLeave(e: DragEvent<HTMLButtonElement>) {
     e.preventDefault();
-    setIsDragOver(false);
+    dragCounterRef.current -= 1;
+    if (dragCounterRef.current === 0) {
+      setIsDragOver(false);
+    }
   }
 
   function handleDrop(e: DragEvent<HTMLButtonElement>) {
     e.preventDefault();
+    dragCounterRef.current = 0;
     setIsDragOver(false);
     const selected = Array.from(e.dataTransfer.files);
     readFiles(selected);
@@ -96,6 +106,7 @@ export default function FileUpload({ label, helperText, files, onChange }: FileU
         type="button"
         onClick={() => inputRef.current?.click()}
         onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         className={`group flex flex-col items-center gap-2 rounded-xl border-2 border-dashed px-6 py-8 text-center transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${

@@ -1,15 +1,33 @@
-// Loads Google Analytics 4 only when NEXT_PUBLIC_GA_MEASUREMENT_ID is set.
-// Set that env var in .env.local (dev) or your hosting dashboard (production).
+"use client";
+
+// Loads Google Analytics 4 only when:
+//   1. NEXT_PUBLIC_GA_MEASUREMENT_ID is set, AND
+//   2. The user has accepted analytics via the ConsentBanner.
+//
+// Listens for the "ak_consent_updated" event so it reacts to consent being
+// granted on the current page without requiring a navigation/reload.
 import Script from "next/script";
+import { useEffect, useState } from "react";
+import { getAnalyticsConsent } from "@/components/ConsentBanner";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 export default function GoogleAnalytics() {
-  const id = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-  if (!id) return null;
+  const [consented, setConsented] = useState(false);
+
+  useEffect(() => {
+    const check = () => setConsented(getAnalyticsConsent() === "accepted");
+    check();
+    window.addEventListener("ak_consent_updated", check);
+    return () => window.removeEventListener("ak_consent_updated", check);
+  }, []);
+
+  if (!GA_ID || !consented) return null;
 
   return (
     <>
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         strategy="afterInteractive"
       />
       <Script id="ga4-init" strategy="afterInteractive">
@@ -17,7 +35,7 @@ export default function GoogleAnalytics() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${id}');
+          gtag('config', '${GA_ID}');
         `}
       </Script>
     </>

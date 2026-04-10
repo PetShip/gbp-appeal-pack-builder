@@ -30,7 +30,9 @@ export default function PrivacyPage() {
         <p className="text-sm text-emerald-800 leading-relaxed">
           AppealKit is designed to handle as little of your data as possible. Appeal information
           you enter stays in your browser session only. We do not store your appeal data on our
-          servers. We do not sell your data. We do not require you to create an account.
+          servers. We do not sell your data. We do not require you to create an account. We use
+          Google Analytics 4 to understand how the product is used — only if you accept analytics
+          when prompted.
         </p>
       </div>
 
@@ -53,12 +55,32 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-slate-900 mb-3">2. Cookies and tracking</h2>
+          <h2 className="text-base font-semibold text-slate-900 mb-3">2. Analytics — Google Analytics 4</h2>
           <p>
-            AppealKit does not use tracking cookies, advertising cookies, or third-party analytics
-            by default. Standard web server logs may capture IP addresses and request metadata for
-            security and operational monitoring purposes. These logs are not used for advertising
-            or sold to third parties.
+            AppealKit uses Google Analytics 4 (GA4) to understand how the product is used and to
+            improve the service. GA4 may collect data through cookies or similar technologies,
+            including information about pages visited, interactions within the product, and general
+            usage patterns.
+          </p>
+          <p className="mt-3">
+            GA4 is only loaded after you explicitly accept analytics via the consent prompt shown
+            on your first visit. If you decline, GA4 is not initialised and no analytics data is
+            collected during your session. Your choice is stored locally in your browser and
+            respected on subsequent visits.
+          </p>
+          <p className="mt-3">
+            Analytics data is processed by Google LLC in accordance with Google&apos;s own{" "}
+            <a
+              href="https://policies.google.com/privacy"
+              className="text-emerald-600 hover:text-emerald-700 underline underline-offset-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              privacy policy
+            </a>
+            . Standard web server logs may also capture IP addresses and request metadata for
+            security and operational monitoring. These logs are not used for advertising or sold
+            to third parties.
           </p>
         </section>
 
@@ -117,16 +139,19 @@ export default function PrivacyPage() {
           <p>
             AppealKit does not retain your appeal data. SessionStorage is automatically cleared
             when you close the browser tab. PDF generation requests are processed in memory and
-            not logged or stored.
+            not logged or stored. Your analytics consent preference is stored locally in your
+            browser and is not transmitted to AppealKit servers.
           </p>
         </section>
 
         <section>
           <h2 className="text-base font-semibold text-slate-900 mb-3">7. Your rights</h2>
           <p>
-            Because AppealKit does not collect or store personal data on its servers, there is
-            nothing to request deletion of. If you have questions or concerns about privacy, you
-            can contact us at the address below.
+            Because AppealKit does not collect or store personal data on its servers (other than
+            operational logs), there is generally nothing to request deletion of. You can decline
+            or withdraw analytics consent at any time by clearing your browser&apos;s local
+            storage for appealkit.pro. If you have questions or concerns about privacy, you can
+            contact us at the address below.
           </p>
         </section>
 
@@ -142,12 +167,13 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-base font-semibold text-slate-900 mb-3">9. Contact</h2>
           <p>
-            For privacy-related questions, contact us at{" "}
+            AppealKit is operated via appealkit.pro. For privacy-related questions, contact us
+            at{" "}
             <a
-              href="mailto:privacy@appealkit.pro"
+              href="mailto:support@appealkit.pro"
               className="text-emerald-600 hover:text-emerald-700"
             >
-              privacy@appealkit.pro
+              support@appealkit.pro
             </a>
             .
           </p>

@@ -13,11 +13,12 @@ import { getAnalyticsConsent } from "@/components/ConsentBanner";
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 export default function GoogleAnalytics() {
-  const [consented, setConsented] = useState(false);
+  const [consented, setConsented] = useState(() =>
+    typeof window !== "undefined" && getAnalyticsConsent() === "accepted"
+  );
 
   useEffect(() => {
     const check = () => setConsented(getAnalyticsConsent() === "accepted");
-    check();
     window.addEventListener("ak_consent_updated", check);
     return () => window.removeEventListener("ak_consent_updated", check);
   }, []);

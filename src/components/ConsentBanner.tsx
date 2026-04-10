@@ -71,6 +71,8 @@ export default function ConsentBanner() {
           </button>
           <button
             onClick={accept}
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
             className="rounded-md bg-emerald-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
           >
             Accept analytics

@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": 'attachment; filename="proofpack-evidence.pdf"',
+        "Content-Disposition": 'attachment; filename="gbp-appeal-pack.pdf"',
       },
     });
   } catch (err) {

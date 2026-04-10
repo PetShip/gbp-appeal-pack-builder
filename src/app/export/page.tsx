@@ -115,7 +115,7 @@ function ExportContent() {
             trackEvent("payment_success", { currency: "USD", payment_amount: PAYMENT_CONFIG.priceAmount });
             setPaymentJustCompleted(true);
           } else {
-            setError("Payment could not be verified. Please contact support if you were charged.");
+            setError("Payment could not be verified. Please contact support@appealkit.pro if you were charged.");
           }
         })
         .catch(() => {

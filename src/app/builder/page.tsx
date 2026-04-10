@@ -8,7 +8,6 @@ import PageIllustration from "@/components/ui/PageIllustration";
 // The builder page holds the case data in state and passes it to the form.
 // On completion, the data is saved to sessionStorage so review/export pages can read it.
 export default function BuilderPage() {
-  const [submitted, setSubmitted] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
 
   function handleComplete(data: CaseData): boolean {
@@ -25,22 +24,7 @@ export default function BuilderPage() {
       );
       return false;
     }
-    setSubmitted(true);
     return true;
-  }
-
-  if (submitted) {
-    return (
-      <div className="flex flex-col items-center gap-4 py-16 text-center">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="text-emerald-600">
-            <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </span>
-        <p className="text-base font-semibold text-slate-900">Appeal pack ready</p>
-        <p className="text-sm text-slate-500">Redirecting to review…</p>
-      </div>
-    );
   }
 
   return (

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import ConsentBanner from "@/components/ConsentBanner";
 
 const BASE_URL = "https://appealkit.pro";
 
@@ -64,6 +65,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 antialiased">
         <GoogleAnalytics />
+        <ConsentBanner />
         <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
           <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
             <Link

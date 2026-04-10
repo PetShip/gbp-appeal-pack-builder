@@ -61,12 +61,13 @@ Version 1 is intentionally small.
 
 1. User lands on the homepage
 2. User starts a new case
-3. User selects appeal type
-4. User enters case details
-5. User adds business, listing, and business, profile, and supporting document details
+3. User selects appeal case type
+4. User enters business and listing details
+5. User enters issue description and profile details
 6. User uploads supporting evidence files
 7. User reviews generated summary and structure
-8. User exports the case as PDF
+8. User pays (Stripe Checkout, when payment gate is enabled)
+9. User downloads the PDF appeal pack
 
 ## MVP philosophy
 
@@ -78,11 +79,12 @@ Help a user with a current GBP suspension create a clean, structured appeal pack
 
 ## Tech stack V1
 
-- Next.js
-- App Router
+- Next.js App Router
 - TypeScript
-- simple styling layer
-- server-side PDF generation
+- Tailwind CSS
+- server-side PDF generation (pdfkit + pdf-lib)
+- Stripe (payment gate)
+- GA4 analytics
 - Vercel hosting
 
 ## Project principles

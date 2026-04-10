@@ -1,24 +1,12 @@
 # architecture.md
 
-# Architecture Snapshot – V1
+# Architecture – AppealKit MVP
 
-## Product boundary
+## Product
 
-GBP Appeal Pack Builder V1 is a no-login, single-session web utility.
-
-It helps a user create a reinstatement-ready PDF for one Google Business Profile suspension appeal.
-
-It does not store long-term user accounts or act as a case management platform.
-
-## Product goal
-
-The goal of V1 is to support one narrow workflow:
-
-Collect appeal information, structure the case, and generate a clean PDF export.
+AppealKit (appealkit.pro) is a no-login, single-session web utility that helps businesses with a suspended Google Business Profile build a structured reinstatement appeal pack and download it as a PDF.
 
 ## Product constraints
-
-### V1 constraints
 
 - no login
 - no persistent case storage
@@ -29,81 +17,63 @@ Collect appeal information, structure the case, and generate a clean PDF export.
 - no legal advice
 - no automated appeal submission
 
-These constraints are intentional and reduce both technical complexity and support burden.
+These constraints are intentional and reduce technical complexity and support burden.
 
-## Supported appeal types
+## Supported case types
 
-V1 supports only these four appeal types:
+Four appeal case types are supported:
 
-- unauthorized suspension
-- service not received
-- listing not recognised
-- listing not as described
+- `documentation_mismatch` — Profile fields do not match official business records
+- `business_legitimacy_proof` — Google requires proof the business is real and eligible
+- `profile_information_cleanup` — Profile contains outdated, inaccurate, or duplicate information
+- `restricted_or_disabled_profile` — Profile has been suspended or restricted and requires reinstatement
 
-The reason for limiting appeal types is to keep the UI, wording, and output logic manageable.
+## Live funnel
 
-## Application structure
+```
+Landing (/)
+  → Builder (/builder)  — 4-step wizard
+  → Review (/review)    — structured case preview
+  → Export (/export)    — payment gate, then PDF download
+```
 
-### Main pages
+## Builder steps
 
-- `/`  
-  Landing page
+### Step 0 – Case type
+User selects one of the four supported case types.
+Inline guidance and upload hints specific to the selected type are shown.
 
-- `/builder`  
-  Main case builder flow
-
-- `/review`  
-  Review page for generated structure
-
-- `/export`  
-  Export page for PDF generation and download
-
-### API route
-
-- `/api/export-pdf`  
-  Handles PDF generation
-
-## Builder flow
-
-The builder is split into 4 steps:
-
-### Step 1 – Appeal type
-User selects one of the supported appeal types.
-
-### Step 2 – Case basics
+### Step 1 – Case basics
 User enters:
 - business name
-- optional contact email
-- listing creation date
-- GBP listing URL or CID
-- primary business category
+- business address
+- primary category
+- website (optional)
+- issue detected date (optional)
 
-### Step 3 – Description and evidence
+### Step 2 – Description and evidence
 User enters:
-- product description
-- fulfillment details
-- customer communication
-- additional notes
-- uploads evidence files
+- issue description
+- GBP profile name
+- GBP profile address
+- business operation description
+- additional notes (optional)
+- uploads supporting evidence files
 
-### Step 4 – Review
-System presents:
-- case summary
-- evidence timeline
-- evidence list
-
-User then proceeds to export.
+### Step 3 – Confirm
+System presents a full preview of all entered data.
+User proceeds to the review page.
 
 ## Core data model
 
-### DisputeType
+### CaseType
 
 ```ts
-type DisputeType =
-  | "unauthorized"
-  | "service_not_received"
-  | "subscription_canceled"
-  | "product_not_as_described";
+type CaseType =
+  | "documentation_mismatch"
+  | "business_legitimacy_proof"
+  | "profile_information_cleanup"
+  | "restricted_or_disabled_profile";
 ```
 
 ### EvidenceFile
@@ -113,17 +83,17 @@ type EvidenceFile = {
   name: string;
   type: string;
   size: number;
-  data?: string; // base64-encoded file content, written at selection time
+  data?: string; // base64-encoded content, no data-URL prefix
 };
 ```
 
-### TimelineItem
+### ConsistencyItem
 
 ```ts
-type TimelineItem = {
-  date: string;
-  title: string;
-  description: string;
+type ConsistencyItem = {
+  field: string;
+  officialValue: string;
+  profileValue: string;
 };
 ```
 
@@ -131,128 +101,168 @@ type TimelineItem = {
 
 ```ts
 type CaseData = {
-  disputeType: DisputeType;
+  // Step 0
+  caseType: CaseType;
 
-  customerName: string;
-  customerEmail?: string;
-  orderDate: string;
-  amount: string;
-  currency: string;
-  productName: string;
+  // Step 1 – case basics
+  businessName: string;
+  businessAddress: string;
+  primaryCategory: string;
+  website?: string;
+  issueDetectedDate?: string;
 
-  productDescription: string;
+  // Step 2 – description and evidence
+  issueDescription: string;
+  profileName: string;
+  profileAddress: string;
+  businessOperationDescription: string;
+  additionalNotes?: string;
 
-  fulfillmentDetails: string;
-  customerCommunication: string;
-  additionalNotes: string;
-
-  timelineItems: TimelineItem[];
   evidenceFiles: EvidenceFile[];
+  consistencyItems?: ConsistencyItem[];
 };
 ```
 
-### Field requirements
+### Required fields
 
-Required fields:
+- caseType
+- businessName
+- businessAddress
+- primaryCategory
+- issueDescription
+- profileName
+- profileAddress
+- businessOperationDescription
 
-- disputeType
-- customerName
-- orderDate
-- amount
-- currency
-- productName
-- productDescription
-- fulfillmentDetails
+### Optional fields
 
-Optional fields:
-
-- customerEmail
-- customerCommunication
+- website
+- issueDetectedDate
 - additionalNotes
-- timelineItems
 - evidenceFiles
+- consistencyItems
 
-## Timeline logic
+## sessionStorage-based architecture
 
-In V1, timeline items do not need to be fully user-managed.
+All case data is persisted in `sessionStorage` under a single key.
 
-Preferred approach:
+- No server-side session state
+- No database reads or writes
+- Data is scoped to the current browser tab and session
+- Data is lost when the tab closes (intentional V1 limitation)
+- `sessionStorage` is typically limited to 5 MB per origin
 
-- derive a base timeline automatically from structured inputs
-- optionally allow limited additions later
-
-Example timeline entries:
-
-- order/subscription date
-- access or delivery fulfillment note
-- customer communication event
-- appeal preparation date
+The builder loads any existing draft from `sessionStorage` on mount. If valid case data is present, the user is taken to the confirm step so they can review or navigate back to edit.
 
 ## File handling
 
-V1 supports manual evidence uploads.
+Evidence files are read client-side at selection time using the `FileReader` API.
 
-V1 assumptions:
+The base64-encoded content (no `data:` URL prefix) is stored in the `data` field of each `EvidenceFile` object and persisted in `sessionStorage` as part of `caseData`. The full object is sent to the server as a plain JSON request body for PDF generation. No multipart form parsing is required.
 
-- files are uploaded during the active session
-- files are processed only for current case handling
-- there is no long-term user file library
-- no file management dashboard is needed
+**Size constraints:** Vercel serverless functions enforce a 4.5 MB request body limit. A client-side payload warning is shown on the review and export pages when the payload approaches this limit.
 
-### File transport mechanism
+## Stripe payment gate
 
-Files are read client-side at selection time using the `FileReader` API. The base64-encoded content (without the `data:` URL prefix) is stored in the `data` field of each `EvidenceFile` object and persisted in `sessionStorage` as part of `caseData`. The entire object — including all file data — is sent to the server as a plain JSON request body. No multipart form parsing is required.
+The export page includes a Stripe Checkout payment gate, controlled by the `NEXT_PUBLIC_PAYMENT_GATE_ENABLED` environment variable.
 
-This approach has a practical size constraint: `sessionStorage` is typically limited to 5 MB per origin, and Vercel serverless functions enforce a 4.5 MB request body limit. Users uploading large or numerous files may encounter errors. A client-side size warning is shown in the UI before export when the payload approaches this limit.
+When enabled:
 
-## Output generation
+1. User reaches the export page after completing the builder
+2. Payment gate UI is shown
+3. User is redirected to Stripe Checkout via `/api/create-checkout-session`
+4. On successful payment, Stripe redirects back with a `session_id` query parameter
+5. `/api/verify-payment` confirms the session is paid
+6. A `pp_paid` flag is written to `sessionStorage` to avoid re-checking
+7. PDF download is unlocked
 
-V1 generates one PDF containing:
+When `PAYMENT_GATE_ENABLED` is false (default), the export page proceeds directly to PDF download without a payment step.
 
-- case summary
-- evidence timeline
-- evidence list
+Payment configuration is centralised in `src/lib/payment-config.ts`.
 
-PDF generation uses two libraries:
+## PDF export flow
 
-- **pdfkit** builds the main evidence document in memory on the server.
-- **pdf-lib** merges pages from any uploaded PDF attachments into the pdfkit output.
+1. User initiates download on the export page
+2. The client POSTs the full `caseData` JSON (including base64 file data) to `/api/export-pdf`
+3. The server builds the PDF in memory using pdfkit and pdf-lib:
+   - Case summary section
+   - Auto-generated timeline (derived from `issueDetectedDate`, `issueDescription`, and `consistencyItems`)
+   - Evidence file index
+   - Inline rendering of JPEG and PNG uploads
+   - Appended pages from uploaded PDF files (via pdf-lib)
+   - Embedded file streams for other file types (listed in evidence index; may not be directly viewable in all PDF viewers)
+4. The PDF buffer is returned as a binary response
+5. The client triggers a browser download
 
-File type handling inside the PDF:
+## Analytics
 
-- JPEG and PNG images are rendered inline using `doc.image()`.
-- Uploaded PDF files have their pages appended to the end of the document via pdf-lib.
-- Other file types are attached as embedded file streams using pdfkit's `doc.file()`. Most PDF viewers do not expose embedded file streams, so these files are listed in the evidence index but are not directly accessible in standard viewers.
+GA4 is integrated via the `GoogleAnalytics` component in the root layout.
 
-V1 does not generate:
+The component is conditional: it loads only when `NEXT_PUBLIC_GA_MEASUREMENT_ID` is set.
 
-- ZIP bundles
-- submission-ready API packages
-- direct Google-formatted uploads
+A `trackEvent` helper in `src/lib/analytics.ts` wraps `window.gtag` and is used for core funnel events:
 
-## Technical decisions
+- `landing_cta_clicked`
+- `builder_started`
+- `review_reached`
+- `checkout_started`
+- `payment_success`
+- `pdf_downloaded`
+
+A `ConsentBanner` component is included for privacy/consent alignment.
+
+## Application structure
+
+### Core funnel pages
+
+| Route | Purpose |
+|-------|---------|
+| `/` | Landing page |
+| `/builder` | 4-step case builder wizard |
+| `/review` | Structured case preview |
+| `/export` | Payment gate and PDF download |
+
+### Supporting pages
+
+| Route | Purpose |
+|-------|---------|
+| `/faq` | Frequently asked questions |
+| `/guides` | Index of SEO guide pages |
+| `/guides/[slug]` | Individual GBP appeal guide pages |
+| `/contact` | Contact page |
+| `/privacy` | Privacy policy |
+| `/tos` | Terms of service |
+| `/imprint` | Imprint |
+
+### API routes
+
+| Route | Purpose |
+|-------|---------|
+| `/api/export-pdf` | Server-side PDF generation |
+| `/api/create-checkout-session` | Creates a Stripe Checkout session |
+| `/api/verify-payment` | Verifies a completed Stripe payment |
+
+## Technical stack
 
 ### Frontend
 
 - Next.js App Router
 - TypeScript
-- component-based form structure
+- Tailwind CSS
+- Component-based form structure
 
 ### Backend
 
-- Next.js route handler for PDF export
-- pdfkit for server-side PDF generation
-- pdf-lib for merging uploaded PDF attachment pages into the main document
-- minimal server logic only where needed
+- Next.js route handlers
+- pdfkit — server-side PDF generation
+- pdf-lib — merging uploaded PDF pages into the main document
+- Stripe Node.js SDK — payment session creation and verification
 
 ### Storage
 
-- no database
-- no persistent user storage in V1
-
-### Authentication
-
-- none in V1
+- sessionStorage (client-side, session-scoped)
+- No database
+- No server-side user storage
 
 ### Hosting
 
@@ -261,74 +271,93 @@ V1 does not generate:
 ## Folder structure
 
 ```
-gbp-appeal-pack-builder/
-├─ src/
-│  ├─ app/
+src/
+├─ app/
+│  ├─ page.tsx                    — Landing page
+│  ├─ layout.tsx                  — Root layout (nav, footer, GA, consent)
+│  ├─ globals.css
+│  ├─ robots.ts
+│  ├─ sitemap.ts
+│  ├─ opengraph-image.tsx
+│  ├─ builder/
 │  │  ├─ page.tsx
-│  │  ├─ builder/
-│  │  │  └─ page.tsx
-│  │  ├─ review/
-│  │  │  └─ page.tsx
-│  │  ├─ export/
-│  │  │  └─ page.tsx
-│  │  ├─ api/
-│  │  │  └─ export-pdf/
-│  │  │     └─ route.ts
-│  │  ├─ layout.tsx
-│  │  └─ globals.css
-│  │
-│  ├─ components/
-│  │  ├─ forms/
-│  │  │  ├─ CaseForm.tsx
-│  │  │  ├─ DisputeTypeStep.tsx
-│  │  │  ├─ EvidenceUploadStep.tsx
-│  │  │  └─ ReviewSummary.tsx
-│  │  ├─ ui/
-│  │  │  ├─ Button.tsx
-│  │  │  ├─ Input.tsx
-│  │  │  ├─ Textarea.tsx
-│  │  │  ├─ FileUpload.tsx
-│  │  │  └─ PayloadWarningBanner.tsx
-│  │
-│  ├─ lib/
-│  │  ├─ dispute-types.ts
-│  │  ├─ payload-size.ts
-│  │  ├─ pdf-builder.ts
-│  │  ├─ summary-builder.ts
-│  │  ├─ timeline-builder.ts
-│  │  ├─ utils.ts
-│  │  └─ validation.ts
-│  │
-│  ├─ types/
-│  │  └─ case.ts
+│  │  └─ layout.tsx               — noindex metadata
+│  ├─ review/
+│  │  ├─ page.tsx
+│  │  └─ layout.tsx               — noindex metadata
+│  ├─ export/
+│  │  ├─ page.tsx                 — payment gate + PDF download
+│  │  └─ layout.tsx               — noindex metadata
+│  ├─ faq/
+│  │  └─ page.tsx
+│  ├─ guides/
+│  │  ├─ page.tsx                 — guides index
+│  │  └─ [guide-slug]/
+│  │     └─ page.tsx
+│  ├─ contact/
+│  ├─ privacy/
+│  ├─ tos/
+│  ├─ imprint/
+│  └─ api/
+│     ├─ export-pdf/
+│     │  └─ route.ts
+│     ├─ create-checkout-session/
+│     │  └─ route.ts
+│     └─ verify-payment/
+│        └─ route.ts
 │
-├─ public/
+├─ components/
+│  ├─ ConsentBanner.tsx
+│  ├─ GoogleAnalytics.tsx
+│  ├─ forms/
+│  │  ├─ CaseForm.tsx             — multi-step form controller
+│  │  ├─ DisputeTypeStep.tsx      — step 0: case type selector
+│  │  ├─ EvidenceUploadStep.tsx   — step 2: description and evidence
+│  │  └─ ReviewSummary.tsx        — structured case preview
+│  └─ ui/
+│     ├─ AccordionItem.tsx
+│     ├─ Button.tsx
+│     ├─ FieldGuide.tsx
+│     ├─ FileUpload.tsx
+│     ├─ Input.tsx
+│     ├─ LandingCtaLink.tsx
+│     ├─ PageIllustration.tsx
+│     ├─ PayloadWarningBanner.tsx
+│     ├─ StepIllustration.tsx
+│     └─ Textarea.tsx
 │
-├─ README.md
-├─ architecture.md
-├─ roadmap.md
-└─ copilot-prompts.md
+├─ lib/
+│  ├─ analytics.ts                — trackEvent GA4 helper
+│  ├─ dispute-types.ts            — case type labels, guidance, upload hints
+│  ├─ payload-size.ts             — sessionStorage/request size estimation
+│  ├─ payment-config.ts           — Stripe payment gate config
+│  ├─ pdf-builder.ts              — server-side PDF generation logic
+│  ├─ summary-builder.ts          — builds structured CaseSummary from CaseData
+│  ├─ timeline-builder.ts         — derives TimelineItem list from CaseData
+│  ├─ utils.ts                    — shared utility helpers
+│  └─ validation.ts               — per-step and full-case validation
+│
+└─ types/
+   └─ case.ts                     — CaseType, CaseData, EvidenceFile, ConsistencyItem
 ```
 
 ## Explicit exclusions
 
-To prevent scope creep, these areas are excluded from V1:
-
-- case persistence
+- case persistence across sessions
 - multi-session recovery
+- user accounts
 - team collaboration
 - admin dashboards
-- appeal analytics
 - Google API synchronization
 - CRM/helpdesk integrations
-- billing system
 - multi-platform support
 - legal reasoning engine
-- AI-generated legal argumentation
+- AI-generated appeal argumentation
+- direct submission to Google
 
-## Current architecture principle
+## Architecture principle
 
-V1 is intentionally built as:
+AppealKit is intentionally built as:
 
 - one narrow workflow
 - one session

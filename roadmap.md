@@ -2,14 +2,18 @@
 
 # Roadmap
 
-## V1 now
+## Live (MVP)
 - landing page
 - no-login builder flow
-- support for 4 appeal types
-- case input form
-- evidence file upload
-- review page
-- PDF export
+- support for 4 GBP appeal case types
+- case input form (business details, profile details, evidence)
+- evidence file upload with base64 encoding
+- review page with structured case preview
+- PDF export (case summary, timeline, evidence list)
+- Stripe payment gate (enabled via env var)
+- GA4 analytics integration
+- consent banner
+- FAQ, guides, privacy, TOS, imprint pages
 - no database
 - no persistent storage
 
@@ -20,12 +24,12 @@
 - user accounts
 - better timeline generation
 - Google-specific export improvements
-- additional appeal types
+- additional case types
+- drag-and-drop file upload
 
 ## Not now
 - team collaboration
 - admin dashboard
-- analytics
 - direct Google API integration
 - CRM/helpdesk integrations
 - legal advice features
